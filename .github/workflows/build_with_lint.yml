@@ -14,8 +14,8 @@ jobs:
       - uses: actions/checkout@v2
       - name: Install CLang 10
         run: |
-          apt update
-          apt install build-essential mm-common clang-format-10 --yes
+          sudo apt update
+          sudo apt install build-essential mm-common clang-format-10 --yes
       - name: Run CLang lint checker
         run: |
           find . -path ./cmake-build-debug -prune -o -type f -name "*.c" -print |
