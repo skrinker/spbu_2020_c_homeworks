@@ -1,6 +1,7 @@
 #include "numericOperations.h"
 
-int min(int a, int b) {
+int min(int a, int b)
+{
     return a > b ? b: a;
 }
 
