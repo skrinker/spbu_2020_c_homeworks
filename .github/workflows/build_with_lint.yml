@@ -13,7 +13,7 @@ jobs:
     steps:
       - uses: actions/checkout@v2
       - name: Check CLang version
-        run: clang-format --version
+        run: clang-format --help
       - name: Run CLang lint checker
         run: |
           find . -path ./cmake-build-debug -prune -o -type f -name "*.c" -print | xargs clang-format --style=WebKit -n -Werror
