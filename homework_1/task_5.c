@@ -57,8 +57,8 @@ void mergeSort(int arr[], int l, int r)
 int findRepeatedMax(int arr[], int r)
 {
     int i;
-    for (i = 0; i < r - 1; i++) {
-        if (arr[i] == arr[i + 1]) {
+    for (i = r - 1; i > 0; i--) {
+        if (arr[i] == arr[i - 1]) {
             return arr[i];
         }
     }
@@ -67,7 +67,7 @@ int findRepeatedMax(int arr[], int r)
 
 int main()
 {
-    int arr[n] = { 12, 11, 13, 5, 6, 7, 12 };
+    int arr[n] = { 12, 12, 13, 5, 6, 7, 7 };
     mergeSort(arr, 0, n - 1);
     printf("%d", findRepeatedMax(arr, n - 1));
     return 0;
