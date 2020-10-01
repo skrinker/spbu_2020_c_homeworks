@@ -1,26 +1,22 @@
 #include <stdbool.h>
 #include <stdio.h>
 
-bool isPrime(int a)
+bool isPrime(int number)
 {
-    if (a % 2 == 0)
+    if (number % 2 == 0)
         return false;
-    int i;
-    bool isPrime = true;
-    for (i = 3; i < a / 2; i = i + 2) {
-        if (a % i == 0) {
-            isPrime = false;
-            break;
-        }
-    }
-    return isPrime;
+    for (int i = 3; i < number / 2; i = i + 2)
+        if (number % i == 0)
+            return false;
+    return true;
 }
 
 int main()
 {
-    int n = 10000;
-    int i;
-    for (i = 2; i <= n; i++) {
+    int number;
+    printf("input number: \n");
+    scanf("%d", &number);
+    for (int i = 2; i <= number; i++) {
         if (isPrime(i)) {
             printf("%d\n", i);
         }
