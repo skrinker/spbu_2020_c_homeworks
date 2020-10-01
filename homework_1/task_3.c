@@ -2,12 +2,36 @@
 #include <stdlib.h>
 #include <string.h>
 
+char* getString()
+{
+    int len = 0;
+    int capacity = 1;
+    char* s = (char*)malloc(capacity * sizeof(char));
+
+    char c = getchar();
+
+    while (c != '\n') {
+        s[(len)++] = c;
+
+        if (len >= capacity) {
+            capacity *= 2;
+            s = (char*)realloc(s, capacity * sizeof(char));
+        }
+
+        c = getchar();
+    }
+
+    s[len] = '\0';
+
+    return s;
+}
+
 int randomNumber(int a)
 {
     return rand() % a;
 }
 
-int getPos(char a)
+int getCharNumber(char a)
 {
     if (a == ' ') {
         return 26;
@@ -28,40 +52,43 @@ int binPow(int a, int n)
     }
 }
 
-int hash(int a, int b, char str[], int prime_number)
+int hash(int a, int b, char str[], int primeNumber)
 {
     int i;
     int result = 0;
     for (i = a; i < b; i++) {
-        result += binPow(prime_number, b - a - i - 1) * getPos(str[i]);
+        result += binPow(primeNumber, b - a - i - 1) * getCharNumber(str[i]);
     }
     return result;
 }
 
-int search(char pattern[], char text[], int prime_number)
+int search(char pattern[], char text[], int primeNumber)
 {
     int i;
     int n = 0;
-    int pattern_length = strlen(pattern);
-    int text_length = strlen(text);
-    int pattern_hash = hash(0, pattern_length, pattern, prime_number);
-    int buff_hash = hash(0, pattern_length, text, prime_number);
-    for (i = 0; i < text_length - pattern_length + 1; i++) {
-        if (buff_hash == pattern_hash) {
-            int c = randomNumber(pattern_length);
+    int patternLength = strlen(pattern);
+    int textLength = strlen(text);
+    int patternHash = hash(0, patternLength, pattern, primeNumber);
+    int buffHash = hash(0, patternLength, text, primeNumber);
+    for (i = 0; i < textLength - patternLength + 1; i++) {
+        if (buffHash == patternHash) {
+            int c = randomNumber(patternLength);
             if (text[i + c] == pattern[c]) {
                 n++;
             }
         }
-        buff_hash = prime_number * buff_hash - binPow(prime_number, pattern_length) * hash(i, i + 1, text, prime_number)
-            + hash(i + pattern_length, i + pattern_length + 1, text, prime_number);
+        buffHash = primeNumber * buffHash - binPow(primeNumber, patternLength) * hash(i, i + 1, text, primeNumber)
+            + hash(i + patternLength, i + patternLength + 1, text, primeNumber);
     }
     return n;
 }
 
 int main()
 {
-    char s[1000];
-    printf("%d", search("this", "this is a test", 13));
+    printf("input text:\n");
+    char* text = getString();
+    printf("enter the string to find:\n");
+    char* searchString = getString();
+    printf("total occurrences: %d \n", search(searchString, text, 13));
     return 0;
 }
