@@ -1,5 +1,6 @@
 #include "stdbool.h"
 #include "stdio.h"
+#include "stdlib.h"
 #include "time.h"
 
 int binPow(int a, int n)
@@ -14,57 +15,59 @@ int binPow(int a, int n)
     return res;
 }
 
-bool isPreviousValuesEqual(int idx, int arr[])
+bool isPreviousValuesEqual(int index, int array[])
 {
-    for (int i = 0; i < idx; i++) {
-        if (arr[i] == arr[idx])
+    for (int i = 0; i < index; i++) {
+        if (array[i] == array[index])
             return true;
     }
     return false;
 }
 
-int* createNumber()
+void createNumber(int generatedNumber[], int digits)
 {
     srand(time(NULL));
     int result = 0;
     int i = 0;
-    static int number[4];
-    while (i < 4) {
-        number[i] = rand() % 10;
-        while (isPreviousValuesEqual(i, number))
-            number[i] = rand() % 10;
+    while (i < digits) {
+        generatedNumber[i] = rand() % 10;
+        while (isPreviousValuesEqual(i, generatedNumber))
+            generatedNumber[i] = rand() % 10;
         i++;
     }
-    return number;
 }
 
-int* splitDigits(int n)
+int* splitDigits(int number, int array[], int arrayLength)
 {
-    static int arr[4];
-    for (int i = 0; i < 4; i++) {
-        arr[i] = n / binPow(10, 3 - i) % 10;
+    for (int i = 0; i < arrayLength; i++) {
+        array[i] = number / binPow(10, 3 - i) % 10;
     }
-    return arr;
+    return array;
 }
 
 void startGame()
 {
     bool isGameOver = false;
-    int* generatedNumber = createNumber();
     printf("Компьютер задумывает четыре различные цифры из 0,1,2,...9. \nИгрок делает ходы, чтобы узнать эти цифры и их порядок.\nКаждый ход состоит из четырёх цифр, 0 может стоять на первом месте.\nВ ответ компьютер показывает число отгаданных цифр, стоящих на своих местах (число быков) и число отгаданных цифр, стоящих не на своих местах (число коров). \n");
+    int digits;
+    printf("Enter how many numbers the game has: \n");
+    scanf("%d", &digits);
+    int* generatedNumber = malloc(digits * sizeof(int));
+    createNumber(generatedNumber, digits);
     while (!isGameOver) {
         int inputValue;
-        printf("Enter 4-digit number: \n");
+        printf("Enter %d-digit number: \n", digits);
         scanf("%d", &inputValue);
-        int* inputNumber = splitDigits(inputValue);
+        int* numberDigits = malloc(digits * sizeof(int));
+        numberDigits = splitDigits(inputValue, numberDigits, digits);
         int cows = 0;
         int bulls = 0;
-        for (int i = 0; i < 4; i++) {
-            if (inputNumber[i] == generatedNumber[i]) {
+        for (int i = 0; i < digits; i++) {
+            if (numberDigits[i] == generatedNumber[i]) {
                 bulls++;
             }
-            for (int j = 0; j < 4; j++) {
-                if (inputNumber[i] == generatedNumber[j] && i != j) {
+            for (int j = 0; j < digits; j++) {
+                if (numberDigits[i] == generatedNumber[j] && i != j) {
                     cows++;
                 }
             }
