@@ -16,3 +16,15 @@ void swap(int* a, int* b)
     *a = *b;
     *b = temp;
 }
+
+int binPow(int a, int n)
+{
+    int res = 1;
+    while (n) {
+        if (n & 1)
+            res *= a;
+        a *= a;
+        n >>= 1;
+    }
+    return res;
+}
