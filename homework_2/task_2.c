@@ -1,19 +1,8 @@
+#include "../library/commonUtils/numericOperations.h"
 #include "stdbool.h"
 #include "stdio.h"
 #include "stdlib.h"
 #include "time.h"
-
-int binPow(int a, int n)
-{
-    int res = 1;
-    while (n) {
-        if (n & 1)
-            res *= a;
-        a *= a;
-        n >>= 1;
-    }
-    return res;
-}
 
 bool isPreviousValuesEqual(int index, int array[])
 {
@@ -48,14 +37,13 @@ int* splitDigits(int number, int array[], int arrayLength)
 void startGame()
 {
     bool isGameOver = false;
-    printf("Компьютер задумывает четыре различные цифры из 0,1,2,...9. \nИгрок делает ходы, чтобы узнать эти цифры и их порядок.\nКаждый ход состоит из четырёх цифр, 0 может стоять на первом месте.\nВ ответ компьютер показывает число отгаданных цифр, стоящих на своих местах (число быков) и число отгаданных цифр, стоящих не на своих местах (число коров). \n");
-    int digits;
+    int digits = 0;
     printf("Enter how many numbers the game has: \n");
     scanf("%d", &digits);
     int* generatedNumber = malloc(digits * sizeof(int));
     createNumber(generatedNumber, digits);
     while (!isGameOver) {
-        int inputValue;
+        int inputValue = 0;
         printf("Enter %d-digit number: \n", digits);
         scanf("%d", &inputValue);
         int* numberDigits = malloc(digits * sizeof(int));
@@ -81,7 +69,7 @@ void startGame()
     }
 }
 
-void main()
+int main()
 {
     startGame();
     return 0;
