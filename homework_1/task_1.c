@@ -6,21 +6,33 @@
 #define UP 1
 #define RIGHT 2
 #define DOWN 3
-#define n 7
 
-void printSpiral(int matrix[n][n], int size)
+void fillMatrix(int** matrix, int size)
 {
-    int i = n / 2;
-    int j = n / 2;
+    int inputNumber = 0;
+    printf("fill in a matrix of size %d \n", size);
+    for (int i = 0; i < size; i++) {
+        for (int j = 0; j < size; j++) {
+            printf("{%d; %d} : ", i, j);
+            scanf("%d", &inputNumber);
+            matrix[i][j] = inputNumber;
+        }
+    }
+}
+
+void printSpiral(int** matrix, int size)
+{
+    int i = size / 2;
+    int j = size / 2;
     printf("%d ", matrix[j][i]);
     int stepNumber = 0;
     int stepsInOneDirection = 0;
-    int c;
+    int step = 0;
     int direction = 0; // 0 - left, 1 up, 2 right, 3 down
-    while (stepNumber < n * n - 1) {
+    while (stepNumber < size * size - 1) {
         if (stepNumber % 2 == 0)
             stepsInOneDirection++;
-        for (c = 0; c < stepsInOneDirection * 2; c++) {
+        for (step = 0; step < stepsInOneDirection * 2; step++) {
             switch (direction) {
             case LEFT:
                 i--;
@@ -37,9 +49,9 @@ void printSpiral(int matrix[n][n], int size)
             }
             printf("%d ", matrix[j][i]);
             stepNumber++;
-            if (stepNumber == n * n - 1)
+            if (stepNumber == size * size - 1)
                 break;
-            if (c == stepsInOneDirection - 1)
+            if (step == stepsInOneDirection - 1)
                 direction = (direction + 1) % 4;
         }
         direction = (direction + 1) % 4;
@@ -49,18 +61,16 @@ void printSpiral(int matrix[n][n], int size)
 
 int main()
 {
-    int a[n][n];
-    int i;
-    int j;
-    for (i = 0; i < n; i++) {
-        for (j = 0; j < n; j++)
-            a[i][j] = rand() % 20;
-    }
-    printSpiral(a, n);
-    for (i = 0; i < n; i++) {
-        for (j = 0; j < n; j++)
-            printf("%d \t", a[i][j]);
-        printf("\n");
-    }
+    int size = 0;
+    printf("input matrix size: ");
+    scanf("%d", &size);
+    int** matrix = malloc(size * sizeof(int*));
+    for (int i = 0; i < size; i++)
+        matrix[i] = malloc(size * sizeof(int));
+    fillMatrix(matrix, size);
+
+    printf("spiral output: \n");
+    printSpiral(matrix, size);
+
     return 0;
 }
