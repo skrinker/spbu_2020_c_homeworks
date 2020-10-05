@@ -5,7 +5,7 @@
 
 int main()
 {
-    int arrayLength;
+    int arrayLength = 0;
     printf("Введите длину массива: \n");
     scanf("%d", &arrayLength);
     printf("Введите массив: \n");
@@ -13,10 +13,10 @@ int main()
     for (int i = 0; i < arrayLength; i++) {
         scanf("%d", &array[i]);
     }
-    int n;
+    int n = 0;
     printf("Введите n:\n");
     scanf("%d", &n);
-    int m;
+    int m = 0;
     printf("Введите m:\n");
     scanf("%d", &m);
     reverse(array, m, n + m - 1);

@@ -9,12 +9,9 @@ set(numericOperations
 set(intArrayOperations
     library/commonUtils/intArrayOperations.c
 )
-add_library(numericOperations ${numericOperations})
-add_library(intArrayOperations ${intArrayOperations})
+add_library(libraries ${numericOperations} ${intArrayOperations})
 
 add_executable(task_1.2 homework_1/task_2.c)
 
-target_link_libraries(intArrayOperations numericOperations)
-target_link_libraries(task_1.2 numericOperations)
-target_link_libraries(task_1.2 intArrayOperations)
+target_link_libraries(task_1.2 libraries)
 
