@@ -16,6 +16,7 @@ int main()
     int number;
     printf("input number: \n");
     scanf("%d", &number);
+    printf("primary numbers up to n: \n");
     for (int i = 2; i <= number; i++)
         if (isPrime(i))
             printf("%d\n", i);
