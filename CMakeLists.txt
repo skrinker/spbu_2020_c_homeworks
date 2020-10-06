@@ -5,7 +5,10 @@ set(CMAKE_C_STANDARD 11)
 
 set(SOURCE_LIB
     library/commonUtils/numericOperations.c
+    library/commonUtils/intArrayOperations.c
 )
 add_library(library ${SOURCE_LIB})
 
 add_executable(task_2.4 homework_2/task_4.c)
+
+target_link_libraries(task_2.4 library)
