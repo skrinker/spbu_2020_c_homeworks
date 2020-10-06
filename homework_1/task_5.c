@@ -1,4 +1,5 @@
 #include "../library/commonUtils/intArrayOperations.h"
+#include "../library/commonUtils/numericOperations.h"
 #include "stdio.h"
 #include "stdlib.h"
 #define n 7
