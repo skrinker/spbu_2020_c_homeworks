@@ -1,17 +1,18 @@
 #include "stdio.h"
 
-unsigned long long factorialRec(int n)
+unsigned long long getRecursiveFactorial(int number)
 {
-    if ((n == 0) || (n == 1))
+    if ((number == 0) || (number == 1))
         return 1;
     unsigned long long factorial = 0;
-    factorial = factorialRec(n - 1) * n;
+    factorial = getRecursiveFactorial(number - 1) * number;
+    return factorial;
 }
 
-unsigned long long factorialLoop(int n)
+unsigned long long getInteractiveFactorial(int number)
 {
     unsigned long long factorial = 1;
-    for (int i = 2; i <= n; i++) {
+    for (int i = 2; i <= number; ++i) {
         factorial *= i;
     }
     return factorial;
@@ -19,11 +20,15 @@ unsigned long long factorialLoop(int n)
 
 int main()
 {
-    int n;
+    int number = 0;
     printf("Enter a number (up to and including 20):  \n");
-    scanf("%d", &n);
-    printf("%llu\n", factorialLoop(n));
-    printf("%llu\n", factorialRec(n));
+    scanf("%d", &number);
+    while (number < 0) {
+        printf("Value should be more than 0, try again =( \n");
+        scanf("%d", &number);
+    }
+    printf("%llu\n", getInteractiveFactorial(number));
+    printf("%llu\n", getRecursiveFactorial(number));
     printf("Magic, the values are equal!\n");
     return 0;
 }
