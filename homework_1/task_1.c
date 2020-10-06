@@ -72,5 +72,6 @@ int main()
     printf("spiral output: \n");
     printSpiral(matrix, size);
 
+    free(matrix);
     return 0;
 }
