@@ -1,33 +1,36 @@
 #include "stdio.h"
+#include "stdlib.h"
 
-int putZerosToEnd(int a[], int n)
+int putZerosToEnd(int array[], int size)
 {
     int count = 0;
 
-    for (int i = 0; i < n; i++)
-        if (a[i] != 0) {
-            a[count] = a[i];
+    for (int i = 0; i < size; ++i)
+        if (array[i] != 0) {
+            array[count] = array[i];
             count++;
         }
 
-    while (count < n)
-        a[count++] = 0;
+    while (count < size)
+        array[count++] = 0;
 }
 
 int main()
 {
-    int n = 0;
+    int size = 0;
     printf("Введите длину массива: \n");
-    scanf("%d", &n);
+    scanf("%d", &size);
 
     printf("Введите массив: \n");
-    int arr[n];
-    for (int i = 0; i < n; i++)
-        scanf("%d", &arr[i]);
+    int* array = (int*)malloc(size * sizeof(int));
+    for (int i = 0; i < size; ++i)
+        scanf("%d", &array[i]);
 
-    putZerosToEnd(arr, n);
+    putZerosToEnd(array, size);
 
-    for (int i = 0; i < n; i++)
-        printf("%d \t", arr[i]);
+    for (int i = 0; i < size; ++i)
+        printf("%d ", array[i]);
+
+    free(array);
     return 0;
 }
