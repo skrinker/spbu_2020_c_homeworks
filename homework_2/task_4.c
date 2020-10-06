@@ -1,27 +1,6 @@
-#include "malloc.h"
 #include "stdbool.h"
 #include "stdio.h"
-
-int binPow(int a, int n)
-{
-    int res = 1;
-    while (n) {
-        if (n & 1)
-            res *= a;
-        a *= a;
-        n >>= 1;
-    }
-    return res;
-}
-
-int* splitDigits(int number, int digitsInNumber)
-{
-    int* arr = malloc(digitsInNumber * sizeof(int));
-    for (int i = 0; i < digitsInNumber; i++) {
-        arr[i] = number / binPow(10, digitsInNumber - 1 - i) % 10;
-    }
-    return arr;
-}
+#include "stdlib.h"
 
 void merge(int arr[], int l, int m, int r)
 {
@@ -86,7 +65,7 @@ int getNumberLength(int number)
 
 int main()
 {
-    int number;
+    int number = 0;
     printf("Введите число: \n");
     scanf("%d", &number);
     int digitsInNumber = getNumberLength(number);
@@ -95,5 +74,6 @@ int main()
     for (int i = 0; i < digitsInNumber; i++)
         if (generatedNumber[i] != 0)
             printf("%d", generatedNumber[i]);
+    free(generatedNumber);
     return 0;
 }
