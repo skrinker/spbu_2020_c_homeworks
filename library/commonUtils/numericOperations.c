@@ -17,7 +17,18 @@ void swap(int* a, int* b)
     *b = temp;
 }
 
-int binPow(int a, int n)
+int* splitDigits(int number, int array[], int arrayLength)
+{
+    int i = 0;
+    while (number > 0) {
+        ++i;
+        array[arrayLength - i] = number % 10;
+        number = number / 10;
+    }
+    return array;
+}
+
+int binaryPow(int a, int n)
 {
     int res = 1;
     while (n) {
