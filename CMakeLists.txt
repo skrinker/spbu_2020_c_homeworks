@@ -3,13 +3,12 @@ project(spbu_2020_c_homeworks C)
 
 set(CMAKE_C_STANDARD 11)
 
-set(numericOperations
+set(libraries
     library/commonUtils/numericOperations.c
-)
-set(intArrayOperations
     library/commonUtils/intArrayOperations.c
 )
-add_library(libraries ${numericOperations} ${intArrayOperations})
+
+add_library(libraries ${libraries})
 
 add_executable(task_1.2 homework_1/task_2.c)
 

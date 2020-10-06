@@ -26,5 +26,7 @@ int main()
     for (int i = 0; i < arrayLength; i++) {
         printf("%d ", array[i]);
     }
+
+    free(array);
     return 0;
 }
