@@ -13,7 +13,7 @@ bool isPrime(int number)
 
 int main()
 {
-    int number;
+    int number = 0;
     printf("input number: \n");
     scanf("%d", &number);
     printf("primary numbers up to n: \n");
