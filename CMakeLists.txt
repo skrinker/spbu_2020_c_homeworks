@@ -6,7 +6,12 @@ set(CMAKE_C_STANDARD 11)
 set(SOURCE_LIB
     library/commonUtils/numericOperations.c
 )
+set(CMAKE_C_COMPILER_AR
+    /bin/lldb
+)
 add_library(library ${SOURCE_LIB})
 
-add_executable(task_1.1 homework_1/task_1.c)
-add_executable(task_1.4 homework_1/task_4.c)
+add_link_options(-fsanitize=address)
+add_compile_options(-fsanitize=address -g)
+
+add_executable(task_3.1 homework_3/main.c)
