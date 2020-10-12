@@ -14,4 +14,4 @@ add_library(library ${SOURCE_LIB})
 add_link_options(-fsanitize=address)
 add_compile_options(-fsanitize=address -g)
 
-add_executable(task_3.1 homework_3/main.c)
+add_executable(task_3.2 homework_3/task_2.c)
