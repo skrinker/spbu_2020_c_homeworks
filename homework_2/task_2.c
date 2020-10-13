@@ -19,11 +19,11 @@ bool checkResult(int* numberDigits, int* generatedNumber, int digitsInGame)
     int bulls = 0;
     for (int i = 0; i < digitsInGame; ++i) {
         if (numberDigits[i] == generatedNumber[i])
-            bulls++;
+            ++bulls;
 
         for (int j = 0; j < digitsInGame; ++j)
             if (numberDigits[i] == generatedNumber[j] && i != j)
-                cows++;
+                ++cows;
     }
 
     if (bulls == digitsInGame) {
@@ -36,7 +36,7 @@ bool checkResult(int* numberDigits, int* generatedNumber, int digitsInGame)
     return false;
 }
 
-void createNumber(int generatedNumber[], int digits)
+void generateNumber(int generatedNumber[], int digits)
 {
     srand(time(NULL));
     int result = 0;
@@ -45,7 +45,7 @@ void createNumber(int generatedNumber[], int digits)
         generatedNumber[i] = rand() % 10;
         while (isPreviousValuesEqual(i, generatedNumber))
             generatedNumber[i] = rand() % 10;
-        i++;
+        ++i;
     }
 }
 
@@ -53,7 +53,7 @@ void startGame(int numberDigits[], int digitsInGame)
 {
     bool isGameOver = false;
     int* generatedNumber = malloc(digitsInGame * sizeof(int));
-    createNumber(generatedNumber, digitsInGame);
+    generateNumber(generatedNumber, digitsInGame);
 
     while (!isGameOver) {
         int inputValue = 0;
