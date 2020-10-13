@@ -1,18 +1,18 @@
 #include "stdio.h"
 #include "stdlib.h"
 
-int putZerosToEnd(int array[], int size)
+void putZerosToEnd(int array[], int size)
 {
     int count = 0;
 
     for (int i = 0; i < size; ++i)
         if (array[i] != 0) {
             array[count] = array[i];
-            count++;
+            ++count;
         }
 
     while (count < size)
-        array[count++] = 0;
+        array[++count] = 0;
 }
 
 int main()
