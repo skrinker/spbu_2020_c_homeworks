@@ -43,8 +43,9 @@ void generateNumber(int generatedNumber[], int digits)
     int i = 0;
     while (i < digits) {
         generatedNumber[i] = rand() % 10;
-        while (isPreviousValuesEqual(i, generatedNumber))
+        do {
             generatedNumber[i] = rand() % 10;
+        } while (isPreviousValuesEqual(i, generatedNumber));
         ++i;
     }
 }
