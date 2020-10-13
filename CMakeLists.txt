@@ -7,5 +7,6 @@ set(SOURCE_LIB
     library/commonUtils/numericOperations.c
 )
 add_library(library ${SOURCE_LIB})
-
-add_executable(task_2.1 homework_2/task_1.c)
+add_link_options(-fsanitize=address)
+add_compile_options(-fsanitize=address -g)
+add_executable(test_1 test_1/task_1.c)
