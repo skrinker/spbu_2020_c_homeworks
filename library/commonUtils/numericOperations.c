@@ -26,7 +26,7 @@ void splitDigits(int number, int array[], int arrayLength)
     while (number > 0) {
         ++i;
         array[arrayLength - i] = number % 10;
-        number = number / 10;
+        number /= 10;
     }
 }
 
@@ -35,7 +35,7 @@ int getNumberLength(int number)
     int numberLength = 0;
     while (number > 0) {
         ++numberLength;
-        number = number / 10;
+        number /= 10;
     }
     return numberLength;
 }
