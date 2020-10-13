@@ -29,7 +29,6 @@ bool checkResult(int* numberDigits, int* generatedNumber, int digitsInGame)
     if (bulls == digitsInGame) {
         printf("WIN \n");
         free(generatedNumber);
-        free(numberDigits);
         return true;
     }
 
@@ -50,31 +49,29 @@ void createNumber(int generatedNumber[], int digits)
     }
 }
 
-void startGame()
+void startGame(int numberDigits[], int digitsInGame)
 {
     bool isGameOver = false;
-    int digitsInGame = 0;
-    printf("Enter how many digits the game has: \n");
-    scanf("%d", &digitsInGame);
     int* generatedNumber = malloc(digitsInGame * sizeof(int));
     createNumber(generatedNumber, digitsInGame);
-
-    for (int i = 0; i < digitsInGame; i++) {
-        printf("%d", generatedNumber[i]);
-    }
 
     while (!isGameOver) {
         int inputValue = 0;
         printf("Enter %d-digit number: \n", digitsInGame);
         scanf("%d", &inputValue);
-        int* numberDigits = malloc(digitsInGame * sizeof(int));
-        numberDigits = splitDigits(inputValue, numberDigits, digitsInGame);
+        splitDigits(inputValue, numberDigits, digitsInGame);
         isGameOver = checkResult(numberDigits, generatedNumber, digitsInGame);
     }
 }
 
 int main()
 {
-    startGame();
+    int digitsInGame = 0;
+    printf("Enter how many digits the game has: \n");
+    scanf("%d", &digitsInGame);
+    int* numberDigits = malloc(digitsInGame * sizeof(int));
+    startGame(numberDigits, digitsInGame);
+
+    free(numberDigits);
     return 0;
 }

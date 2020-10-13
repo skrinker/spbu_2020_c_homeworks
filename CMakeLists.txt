@@ -8,7 +8,15 @@ set(SOURCE_LIB
     library/commonUtils/intArrayOperations.c
 )
 
+set(CMAKE_C_COMPILER_AR
+    /bin/lldb
+)
+
 add_library(library ${SOURCE_LIB})
+
+add_link_options(-fsanitize=address)	
+add_compile_options(-fsanitize=address -g)
+
 
 add_executable(task_2.2 homework_2/task_2.c)
 
