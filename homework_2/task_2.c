@@ -39,10 +39,8 @@ bool checkResult(int* numberDigits, int* generatedNumber, int digitsInGame)
 void generateNumber(int generatedNumber[], int digits)
 {
     srand(time(NULL));
-    int result = 0;
     int i = 0;
     while (i < digits) {
-        generatedNumber[i] = rand() % 10;
         do {
             generatedNumber[i] = rand() % 10;
         } while (isPreviousValuesEqual(i, generatedNumber));
