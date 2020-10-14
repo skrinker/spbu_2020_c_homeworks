@@ -3,4 +3,11 @@ project(spbu_2020_c_homeworks C)
 
 set(CMAKE_C_STANDARD 11)
 
-add_executable(task_2.5 homework_2/task_5.c)
+set(SOURCE_LIB
+        library/stack/stack.c
+)
+
+add_library(library ${SOURCE_LIB})
+
+add_executable(task_3.1 homework_3/task_1.c)
+target_link_libraries(task_3.1 library)
