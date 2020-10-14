@@ -11,5 +11,3 @@ set(SOURCE_LIB
 add_library(library ${SOURCE_LIB})
 
 add_executable(task_2.2 homework_2/task_2.c)
-
-target_link_libraries(task_2.2 library)
