@@ -1,23 +1,7 @@
-#include "../library/commonUtils/intArrayOperations.h"
 #include "../library/commonUtils/numericOperations.h"
 #include "stdbool.h"
 #include "stdio.h"
 #include "stdlib.h"
-
-int getNumberLength(unsigned long long number)
-{
-    int digitsInNumber = 0;
-    while (number > 0) {
-        number /= 10;
-        ++digitsInNumber;
-    }
-    return digitsInNumber;
-}
-
-int compare(const void* x1, const void* x2)
-{
-    return (*(int*)x1 - *(int*)x2);
-}
 
 int main()
 {
@@ -29,18 +13,17 @@ int main()
     generatedNumber = splitDigits(number, generatedNumber, digitsInNumber);
 
     qsort(generatedNumber, digitsInNumber, sizeof(int), compare);
-    bool isFirstPrint = false;
-    int minNoneZeroIndex = -1;
+    int minNoneZeroValue = 0;
+
     for (int i = 0; i < digitsInNumber; ++i) {
-        if (generatedNumber[i] != 0 && !isFirstPrint) {
-            printf("%d", generatedNumber[i]);
-            isFirstPrint = true;
-            minNoneZeroIndex = i;
-            i = 0;
+        if (generatedNumber[i] != 0 && generatedNumber[i] > minNoneZeroValue) {
+            minNoneZeroValue = digitsInNumber;
+            swap(&generatedNumber[0], &generatedNumber[i]);
         }
-        if (isFirstPrint && minNoneZeroIndex != i) {
-            printf("%d", generatedNumber[i]);
-        }
+    }
+    printf("%d", generatedNumber[0]);
+    for (int i = 1; i < digitsInNumber; ++i) {
+        printf("%d", generatedNumber[i]);
     }
 
     free(generatedNumber);
