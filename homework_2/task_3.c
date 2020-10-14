@@ -1,7 +1,7 @@
 #include "stdio.h"
 #include "stdlib.h"
 
-int putZerosToEnd(int array[], int size)
+void putZerosToEnd(int array[], int size)
 {
     int count = 0;
 
