@@ -19,6 +19,7 @@ int main()
         if (generatedNumber[i] != 0 && generatedNumber[i] > minNoneZeroValue) {
             minNoneZeroValue = digitsInNumber;
             swap(&generatedNumber[0], &generatedNumber[i]);
+            break;
         }
     }
     printf("%d", generatedNumber[0]);
