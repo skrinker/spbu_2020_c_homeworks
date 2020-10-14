@@ -3,4 +3,4 @@ project(spbu_2020_c_homeworks C)
 
 set(CMAKE_C_STANDARD 11)
 
-add_executable(task_1.5 homework_2/task_5.c)
+add_executable(task_2.5 homework_2/task_5.c)
