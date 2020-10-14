@@ -2,11 +2,10 @@
 
 unsigned long long getRecursiveFactorial(int number)
 {
-    if ((number == 0) || (number == 1))
+    if (number <= 1)
         return 1;
-    unsigned long long factorial = 0;
-    factorial = getRecursiveFactorial(number - 1) * number;
-    return factorial;
+
+    return getRecursiveFactorial(number - 1) * number;
 }
 
 unsigned long long getInteractiveFactorial(int number)
