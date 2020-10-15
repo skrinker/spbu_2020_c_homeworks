@@ -15,3 +15,5 @@ add_link_options(-fsanitize=address)
 add_compile_options(-fsanitize=address -g)
 
 add_executable(task_3.1 homework_3/main.c)
+add_executable(task_2.1 homework_2/task_1.c)
+add_executable(task_2.3 homework_2/task_3.c)
