@@ -1,4 +1,4 @@
-#include "list.c";
+#include "list.c"
 
 void createCycleList(List* list)
 {
