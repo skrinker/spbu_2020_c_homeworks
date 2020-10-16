@@ -1,4 +1,5 @@
 #include "stringOperations.h"
+#include "../commonUtils/numericOperations.c"
 
 bool isCharNumber(char symbol)
 {
