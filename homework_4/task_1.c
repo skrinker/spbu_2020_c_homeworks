@@ -1,28 +1,60 @@
+#include "../library/commonUtils/numericOperations.c"
 #include "../library/stack/stack.c"
+#include "../library/string/stringOperations.c"
 #include "stdio.h"
 #include "string.h"
 
-int main()
-{
-    int stringSize = 0;
-    printf("input string size");
-    scanf("%d", &stringSize);
+#define SPACE 32
+#define MULTIPLICATION 42
+#define ADDITION 43
+#define SUBTRACTION 45
+#define DIVISION 47
 
-    char* string = malloc(stringSize * sizeof(char));
-    evaluatePostfix(stringSize, string);
-    return 0;
+double evaluatePostfix(char* expression, Stack* stack)
+{
+    int expressionSize = strlen(expression);
+    int lastNonSpaceIndex = 0;
+    for (int i = 0; i < expressionSize; ++i) {
+        if (!isCharNumber(expression[i])) {
+            switch (expression[i]) {
+            case SPACE: {
+                int value = getNumberFromString(expression, lastNonSpaceIndex, i - 1);
+                push(stack, createStackElement(value));
+                lastNonSpaceIndex = i + 1;
+                break;
+            }
+            default: {
+                double value1 = pop(stack)->value;
+                double value2 = pop(stack)->value;
+                switch (expression[i]) {
+                case ADDITION:
+                    push(stack, createStackElement(value1 + value2));
+                    break;
+                case DIVISION:
+                    push(stack, createStackElement(value2 / value1));
+                    break;
+                case SUBTRACTION:
+                    push(stack, createStackElement(value2 - value1));
+                    break;
+                case MULTIPLICATION:
+                    push(stack, createStackElement(value1 * value2));
+                    break;
+                }
+            }
+            }
+        }
+    }
+    return stack->top->value;
 }
 
-int evaluatePostfix(int stringSize, char* string)
+int main()
 {
-    int length = 0;
-    int capacity = 1;
-    char symbol = getchar();
-    while (stringSize > 1) {
-        string[(length)++] = symbol;
-        symbol = getchar();
-        --stringSize;
-    }
-    string[length] = '\0';
+    printf("Please input postfix expression: \n");
+    char* inputString = getString();
+    Stack* stack = createStack();
+    printf("result: %f \n", evaluatePostfix(inputString, stack));
+    printf("Thank you for using my calculator \n");
+    deleteStack(stack);
+    free(inputString);
     return 0;
 }

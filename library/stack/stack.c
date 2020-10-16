@@ -50,7 +50,15 @@ StackElement* pop(Stack* stack)
     }
 }
 
-void deleteStackElement(StackElement* stackElement)
+void deleteElement(StackElement* stackElement)
 {
     free(stackElement);
+}
+
+void deleteStack(Stack* stack)
+{
+    while (!isEmpty) {
+        pop(stack);
+    }
+    free(stack);
 }

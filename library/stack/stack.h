@@ -8,10 +8,10 @@ typedef struct Stack Stack;
 
 StackElement* createStackElement(double storeElement);
 Stack* createStack();
+int size(Stack* stack);
+bool isEmpty(Stack* stack);
 void push(Stack* stack, StackElement* newElement);
 StackElement* pop(Stack* stack);
-bool isEmpty(Stack* stack);
 void deleteStackElement(StackElement* stackElement);
-int size(Stack* stack);
-
+void deleteStack(Stack* stack);
 #endif
