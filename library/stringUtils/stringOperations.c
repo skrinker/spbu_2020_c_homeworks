@@ -28,7 +28,7 @@ int getNumberFromString(char* string, int start, int end)
 {
     int value = 0;
     for (int j = start; j <= end; ++j) {
-        value += (string[j] - '0') * binPow(10, end - j);
+        value += (string[j] - '0') * binaryPow(10, end - j);
     }
     return value;
 }

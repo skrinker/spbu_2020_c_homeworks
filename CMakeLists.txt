@@ -6,10 +6,10 @@ set(CMAKE_C_STANDARD 11)
 set(SOURCE_LIB
         library/stack/stack.c
         library/commonUtils/numericOperations.c
-        library/string/stringOperations.c
+        library/stringUtils/stringOperations.c
 )
 
-add_library(library ${SOURCE_LIB})
-
 add_executable(task_4.1 homework_4/task_1.c)
+add_library(library ${SOURCE_LIB})
 target_link_libraries(task_4.1 library)
+

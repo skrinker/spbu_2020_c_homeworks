@@ -14,4 +14,5 @@ void push(Stack* stack, StackElement* newElement);
 StackElement* pop(Stack* stack);
 void deleteStackElement(StackElement* stackElement);
 void deleteStack(Stack* stack);
+
 #endif
