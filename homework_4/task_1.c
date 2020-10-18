@@ -1,49 +1,52 @@
-#include "../library/stack/stack.c"
-#include "../library/stringUtils/stringOperations.c"
+#include "../library/stack/stack.h"
+#include "../library/stringUtils/stringOperations.h"
 #include "stdio.h"
 #include "string.h"
 
-#define SPACE 32
-#define MULTIPLICATION 42
-#define ADDITION 43
-#define SUBTRACTION 45
-#define DIVISION 47
+double calculateOperation(double value1, double value2, char symbol)
+{
+    switch (symbol) {
+    case '+':
+        return value2 + value1;
+    case '-':
+        return value2 - value1;
+    case '/':
+        return value2 / value1;
+    case '*':
+        return value2 * value1;
+    }
+}
+
+void calculatePostfixOperation(char symbol, Stack* stack)
+{
+    double value1 = pop(stack);
+    double value2 = pop(stack);
+    double result = calculateOperation(value1, value2, symbol);
+    push(stack, createStackElement(result));
+}
+
+void addNumberToPostfix(int lastNonSpaceIndex, int index, Stack* stack, char expression[])
+{
+    int value = getNumberFromString(expression, lastNonSpaceIndex, index - 1);
+    push(stack, createStackElement(value));
+}
 
 double evaluatePostfix(char* expression, Stack* stack)
 {
     int expressionSize = strlen(expression);
     int lastNonSpaceIndex = 0;
     for (int i = 0; i < expressionSize; ++i) {
-        if (!isCharNumber(expression[i])) {
-            switch (expression[i]) {
-            case SPACE: {
-                int value = getNumberFromString(expression, lastNonSpaceIndex, i - 1);
-                push(stack, createStackElement(value));
-                lastNonSpaceIndex = i + 1;
-                break;
-            }
-            default: {
-                double value1 = pop(stack)->value;
-                double value2 = pop(stack)->value;
-                switch (expression[i]) {
-                case ADDITION:
-                    push(stack, createStackElement(value1 + value2));
-                    break;
-                case DIVISION:
-                    push(stack, createStackElement(value2 / value1));
-                    break;
-                case SUBTRACTION:
-                    push(stack, createStackElement(value2 - value1));
-                    break;
-                case MULTIPLICATION:
-                    push(stack, createStackElement(value1 * value2));
-                    break;
-                }
-            }
-            }
+        if (isCharOperand(expression[i])) {
+            calculatePostfixOperation(expression[i], stack);
+            continue;
+        }
+        if (isCharSpace(expression[i]) && !isCharOperand(expression[i - 1])) {
+            addNumberToPostfix(lastNonSpaceIndex, i, stack, expression);
+            lastNonSpaceIndex = i + 1;
+            continue;
         }
     }
-    return stack->top->value;
+    return pop(stack);
 }
 
 int main()
