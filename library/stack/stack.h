@@ -1,7 +1,7 @@
 #include "stdbool.h"
 
-#ifndef SPBU_2020_C_HOMEWORKS_STACK
-#define SPBU_2020_C_HOMEWORKS_STACK
+#ifndef SPBU_2020_C_STACK_H
+#define SPBU_2020_C_STACK_H
 
 typedef struct StackElement StackElement;
 typedef struct Stack Stack;
@@ -11,7 +11,7 @@ Stack* createStack();
 int size(Stack* stack);
 bool isEmpty(Stack* stack);
 void push(Stack* stack, StackElement* newElement);
-StackElement* pop(Stack* stack);
+double pop(Stack* stack);
 void deleteStackElement(StackElement* stackElement);
 void deleteStack(Stack* stack);
 
