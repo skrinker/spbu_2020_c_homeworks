@@ -1,19 +1,20 @@
-#include "math.h"
+#include "../library/commonUtils/numericOperations.h"
+#include "stdint.h"
 #include "stdio.h"
 
-char getSign(double number)
+char getSign(uint64_t bits)
 {
-    if (!signbit(number))
-        return '+';
+    return (bits >> 63 & 1) ? '-' : '+';
 }
 
-void printExponentialForm(double number)
+int getExponent(uint64_t bits)
 {
-    double mantissa = 0;
-    int exponent = 0;
-    mantissa = frexp(number, &exponent);
-    printf("Result: ");
-    printf("%f = %c%.20f * 2^{%d}\n", number, getSign(number), mantissa * 2, exponent - 1);
+    return ((bits >> 52) & 0x7FF) - 1023;
+}
+
+double getMantissa(uint64_t bits)
+{
+    return (double)(bits & 0x000FFFFFFFFFFFFF) / (double)binaryPow(2, 52) + 1;
 }
 
 int main()
@@ -21,6 +22,11 @@ int main()
     double number = 0;
     printf("Enter a number: ");
     scanf("%lf", &number);
-    printExponentialForm(number);
+    uint64_t bits = *((uint64_t*)&number);
+    double mantissa = getMantissa(bits);
+    int exponent = getExponent(bits);
+    char sign = getSign(bits);
+    printf("Result: ");
+    printf("%f = %c%.20f * 2^{%d}\n", number, sign, mantissa, exponent);
     return 0;
 }
