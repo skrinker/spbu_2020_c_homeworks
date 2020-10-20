@@ -40,9 +40,9 @@ int getNumberLength(int number)
     return numberLength;
 }
 
-int binaryPow(int a, int n)
+unsigned long long binaryPow(unsigned long long a, unsigned long long n)
 {
-    int res = 1;
+    unsigned long long res = 1;
     while (n) {
         if (n & 1)
             res *= a;
