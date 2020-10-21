@@ -25,6 +25,7 @@ int main()
     scanf("%d", &n);
     ListElement** elements = (ListElement**)malloc(n * sizeof(ListElement*));
     List* list = createList();
+    printf("Input value of items: \n");
     for (int i = 0; i < n; i++) {
         int number = 0;
         scanf("%d", &number);
