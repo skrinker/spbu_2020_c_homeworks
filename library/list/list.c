@@ -168,9 +168,17 @@ ListElement* getNext(ListElement* element)
     return element->next;
 }
 
-void deleteList(List* list)
+bool deleteList(List* list)
 {
+    ListElement* current = list->head;
+    ListElement* previous = NULL;
+    while (current != NULL) {
+        previous = current;
+        current = getNext(current);
+        free(previous);
+    }
     free(list);
+    return true;
 }
 
 void updateNext(ListElement* element, ListElement* next)

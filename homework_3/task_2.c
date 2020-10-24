@@ -20,14 +20,16 @@ int main()
     int numberOfWarriors = 0;
     printf("input number of warriors: \n");
     scanf("%d", &numberOfWarriors);
-    ListElement** elements = (ListElement**)malloc(numberOfWarriors * sizeof(ListElement*));
-    for (int i = 0; i < numberOfWarriors; i++) {
-        elements[i] = NULL;
-    }
+    // ListElement** elements = (ListElement**)malloc(numberOfWarriors * sizeof(ListElement*));
+    // for (int i = 0; i < numberOfWarriors; i++) {
+    //     elements[i] = NULL;
+    // }
     List* list = createList();
     for (int i = 1; i <= numberOfWarriors; i++) {
-        elements[i - 1] = createListElement(i);
-        insert(elements[i - 1], i - 1, list);
+        insert(createListElement(i), i - 1, list);
+        // elements[i - 1]
+        //     = createListElement(i);
+        // insert(elements[i - 1], i - 1, list);
     }
 
     int killedWarrior = 0;
@@ -39,9 +41,9 @@ int main()
     printf("last warrior: ");
     printf("%d\n", getValue(head(list)));
 
-    for (int i = 0; i < numberOfWarriors; i++)
-        free(elements[i]);
-    free(elements);
+    // for (int i = 0; i < numberOfWarriors; i++)
+    //     free(elements[i]);
+    // free(elements);
 
     deleteList(list);
 
