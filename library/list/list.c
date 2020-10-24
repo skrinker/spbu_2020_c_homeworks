@@ -180,6 +180,7 @@ void deleteList(List* list)
     while (!isEmpty(list)) {
         deleteElement(0, list);
     }
+    free(list);
 }
 
 void updateNext(ListElement* element, ListElement* next)
