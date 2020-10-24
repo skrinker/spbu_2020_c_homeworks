@@ -23,7 +23,7 @@ bool deleteElement(int position, List* list);
 void printList(List* list);
 int getSize(List* list);
 int getValue(ListElement* element);
-bool deleteList(List* list);
+void deleteList(List* list);
 void updateNext(ListElement* element, ListElement* next);
 void updateHead(List* list, ListElement* element);
 void changeSize(int step, List* list);

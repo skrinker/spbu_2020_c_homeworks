@@ -84,6 +84,10 @@ bool insert(ListElement* element, int position, List* list)
 
 void printList(List* list)
 {
+    if (getSize(list) == 0) {
+        printf("list is empty");
+        return;
+    }
     ListElement* current = list->head;
     for (int i = 0; i < getSize(list) - 1; i++) {
         printf("%d -> ", getValue(current));
@@ -135,8 +139,10 @@ bool deleteElement(int position, List* list)
         return false;
     }
     if (position == 0) {
+        ListElement* current = head(list);
         list->head = getNext(head(list));
-        (list->size)--;
+        free(current);
+        --(list->size);
         return true;
     }
     if (position > 0) {
@@ -148,7 +154,7 @@ bool deleteElement(int position, List* list)
         }
         previous->next = getNext(current);
         free(current);
-        (list->size)--;
+        --(list->size);
 
         return true;
     }
@@ -169,17 +175,11 @@ ListElement* getNext(ListElement* element)
     return element->next;
 }
 
-bool deleteList(List* list)
+void deleteList(List* list)
 {
-    ListElement* current = list->head;
-    ListElement* previous = NULL;
-    while (current != NULL) {
-        previous = current;
-        current = getNext(current);
-        free(previous);
+    while (!isEmpty(list)) {
+        deleteElement(0, list);
     }
-    free(list);
-    return true;
 }
 
 void updateNext(ListElement* element, ListElement* next)
