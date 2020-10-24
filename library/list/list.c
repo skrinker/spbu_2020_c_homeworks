@@ -147,6 +147,7 @@ bool deleteElement(int position, List* list)
             current = getNext(current);
         }
         previous->next = getNext(current);
+        free(current);
         (list->size)--;
 
         return true;
