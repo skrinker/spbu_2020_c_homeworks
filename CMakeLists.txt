@@ -32,4 +32,3 @@ target_link_libraries(task_1.3 libraries)
 add_executable(task_1.2 homework_1/task_2.c)
 target_link_libraries(task_1.2 libraries)
 add_executable(task_1.1 homework_1/task_1.c)
-
