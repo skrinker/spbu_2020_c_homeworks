@@ -42,13 +42,14 @@ int compare(const void* x1, const void* x2)
     return (*(int*)x1 - *(int*)x2);
 }
 
-unsigned long long binaryPow(unsigned long long a, unsigned long long n)
+int binaryPow(int a, int n)
 {
-    unsigned long long result = 1;
+    int result = 1;
     while (n) {
         if (n & 1)
             result *= a;
         a *= a;
         n >>= 1;
     }
+    return result;
 }
