@@ -7,10 +7,6 @@ set(libraries
     library/commonUtils/numericOperations.c
     library/commonUtils/intArrayOperations.c
     library/commonUtils/stringOperations.c
-
-set(libraries
-    library/commonUtils/numericOperations.c
-    library/commonUtils/intArrayOperations.c
 )
 
 add_library(libraries ${libraries})
