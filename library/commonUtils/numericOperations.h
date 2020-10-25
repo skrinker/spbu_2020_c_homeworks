@@ -5,7 +5,7 @@ void swap(int* a, int* b);
 int min(int a, int b);
 int max(int a, int b);
 unsigned long long binaryPow(unsigned long long a, unsigned long long n);
-void splitDigits(int number, int array[], int arrayLength);
-int getNumberLength(int number);
+void splitDigits(unsigned long long number, int array[], int arrayLength);
+int getNumberLength(unsigned long long number);
 
 #endif //SPBU_2020_C_NUMERICOPERATIONS_H
