@@ -4,14 +4,18 @@ project(spbu_2020_c_homeworks C)
 
 set(CMAKE_C_STANDARD 11)
 
-set(SOURCE_LIB
+set(libraries
     library/commonUtils/numericOperations.c
     library/commonUtils/intArrayOperations.c
 )
 
-add_library(library ${SOURCE_LIB})
-
 add_executable(task_1.5 homework_1/task_5.c)
-target_link_libraries(task_1.5 library)
-
+target_link_libraries(task_1.5 libraries)
+add_executable(task_1.4 homework_1/task_4.c)
+add_executable(task_1.3 homework_1/task_3.c)
+target_link_libraries(task_1.3 library)
+add_library(libraries ${libraries})
+add_executable(task_1.2 homework_1/task_2.c)
+target_link_libraries(task_1.2 libraries)
 add_executable(task_1.1 homework_1/task_1.c)
+
