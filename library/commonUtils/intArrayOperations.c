@@ -1,17 +1,13 @@
 #include "intArrayOperations.h"
 #include "numericOperations.h"
 
-<<<<<<< HEAD
-=======
 void reverse(int* array, int startPoint, int endPoint)
 {
     for (int i = 0; i < (endPoint - startPoint) / 2 + 1; i++) {
         swap(&array[startPoint + i], &array[endPoint - i]);
     }
-<<<<<<< HEAD
 }
 
->>>>>>> task_1.4
 void merge(int arr[], int l, int m, int r)
 {
     int i, j, k;
@@ -61,16 +57,4 @@ void mergeSort(int arr[], int l, int r)
         mergeSort(arr, m + 1, r);
         merge(arr, l, m, r);
     }
-<<<<<<< HEAD
-}
-
-void reverse(int* array, int startPoint, int endPoint)
-{
-    for (int i = 0; i < (endPoint - startPoint) / 2 + 1; i++) {
-        swap(&array[startPoint + i], &array[endPoint - i]);
-    }
-=======
-=======
->>>>>>> task_1.3
->>>>>>> task_1.4
 }
