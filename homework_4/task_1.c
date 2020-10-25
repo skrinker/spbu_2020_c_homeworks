@@ -1,5 +1,5 @@
+#include "../library/commonUtils/stringOperations.h"
 #include "../library/stack/stack.h"
-#include "../library/stringUtils/stringOperations.h"
 #include "stdio.h"
 #include "string.h"
 

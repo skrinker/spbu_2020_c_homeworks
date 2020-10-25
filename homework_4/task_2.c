@@ -1,4 +1,3 @@
-#include "../library/commonUtils/numericOperations.h"
 #include "stdint.h"
 #include "stdio.h"
 
@@ -14,7 +13,8 @@ int getExponent(uint64_t bits)
 
 double getMantissa(uint64_t bits)
 {
-    return (double)(bits & 0x000FFFFFFFFFFFFF) / (double)binaryPow(2, 52) + 1;
+    unsigned long long denominator = (unsigned long long)1 << 52;
+    return (double)(bits & 0x000FFFFFFFFFFFFF) / (double)denominator + 1;
 }
 
 int main()
