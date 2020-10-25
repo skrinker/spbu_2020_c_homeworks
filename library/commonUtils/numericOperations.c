@@ -21,3 +21,10 @@ int binaryPow(int number, int power)
     }
     return result;
 }
+
+void swap(int* a, int* b)
+{
+    int temp = *a;
+    *a = *b;
+    *b = temp;
+}
