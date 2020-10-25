@@ -6,6 +6,7 @@ void reverse(int* array, int startPoint, int endPoint)
     for (int i = 0; i < (endPoint - startPoint) / 2 + 1; i++) {
         swap(&array[startPoint + i], &array[endPoint - i]);
     }
+<<<<<<< HEAD
 }
 
 void merge(int arr[], int l, int m, int r)
@@ -57,4 +58,6 @@ void mergeSort(int arr[], int l, int r)
         mergeSort(arr, m + 1, r);
         merge(arr, l, m, r);
     }
+=======
+>>>>>>> task_1.3
 }

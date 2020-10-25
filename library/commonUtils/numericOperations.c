@@ -10,21 +10,21 @@ int max(int a, int b)
     return a > b ? a : b;
 }
 
+int binaryPow(int number, int power)
+{
+    int result = 1;
+    while (number) {
+        if (number & 1)
+            result *= number;
+        number *= number;
+        power >>= 1;
+    }
+    return result;
+}
+
 void swap(int* a, int* b)
 {
     int temp = *a;
     *a = *b;
     *b = temp;
-}
-
-int binPow(int a, int n)
-{
-    int res = 1;
-    while (n) {
-        if (n & 1)
-            res *= a;
-        a *= a;
-        n >>= 1;
-    }
-    return res;
 }
