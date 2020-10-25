@@ -50,6 +50,5 @@ unsigned long long binaryPow(unsigned long long a, unsigned long long n)
             result *= a;
         a *= a;
         n >>= 1;
-    }
-    return result;
 }
+
