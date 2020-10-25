@@ -9,8 +9,9 @@ set(libraries
 )
 
 add_library(libraries ${libraries})
-
 add_executable(task_1.2 homework_1/task_2.c)
-add_executable(task_1.1 homework_1/task_1.c)
 target_link_libraries(task_1.2 libraries)
+add_executable(task_1.1 homework_1/task_1.c)
+add_executable(task_2.1 homework_2/task_1.c)
+add_executable(task_2.3 homework_2/task_3.c)
 
