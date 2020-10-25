@@ -124,7 +124,7 @@ int locateByValue(ListElement* element, List* list)
 
 ListElement* retrieve(int position, List* list)
 {
-    if (position < getSize(list)) {
+    if (position < getSize(list) && position >= 0) {
         ListElement* current = list->head;
         for (int i = 0; i < position; i++) {
             current = getNext(current);
