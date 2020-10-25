@@ -18,6 +18,7 @@ ListElement* tail(List* list);
 ListElement* head(List* list);
 bool insert(ListElement* element, int position, List* list);
 int locate(ListElement* element, List* list);
+int locateByValue(ListElement* element, List* list);
 ListElement* retrieve(int position, List* list);
 bool deleteElement(int position, List* list);
 void printList(List* list);
