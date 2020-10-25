@@ -3,14 +3,10 @@ project(spbu_2020_c_homeworks C)
 
 set(CMAKE_C_STANDARD 11)
 
-add_library(numericOperations library/commonUtils/numericOperations.c)
-add_library(stringOperations library/stringUtils/stringOperations.c)
-
-
 set(libraries
     library/commonUtils/numericOperations.c
     library/commonUtils/intArrayOperations.c
-    library/stringUtils/stringOperations.c
+    library/commonUtils/stringOperations.c
 )
 
 add_library(libraries ${libraries})
