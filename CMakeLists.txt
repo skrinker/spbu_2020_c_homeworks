@@ -8,10 +8,12 @@ set(libraries
     library/commonUtils/numericOperations.c
     library/commonUtils/intArrayOperations.c
 )
+
 add_library(libraries ${libraries})
 add_library(list library/list/list.c)
 
-
+add_executable(task_3.2 homework_3/task_2.c)
+target_link_libraries(task_3.2 list)
 add_executable(task_3.1 homework_3/task_1.c)
 target_link_libraries(task_3.1 list)
 add_executable(task_2.5 homework_2/task_5.c)
