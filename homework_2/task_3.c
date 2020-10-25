@@ -1,11 +1,7 @@
 #include "stdio.h"
 #include "stdlib.h"
 
-<<<<<<< HEAD
-void putZerosToEnd(int array[], int size)
-=======
 void putZerosToEnd(int* array, int size)
->>>>>>> task_2.5
 {
     int count = 0;
 
