@@ -45,8 +45,8 @@ int compare(const void* x1, const void* x2)
 int binaryPow(int number, int power)
 {
     int result = 1;
-    while (number) {
-        if (number & 1)
+    while (power > 0) {
+        if (power & 1)
             result *= number;
         number *= number;
         power >>= 1;

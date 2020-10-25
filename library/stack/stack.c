@@ -39,17 +39,21 @@ bool isEmpty(Stack* stack)
     return (stack->size == 0);
 }
 
-double pop(Stack* stack)
+StackElement* pop(Stack* stack)
 {
-    if (!isEmpty(stack)) {
-        StackElement* current = stack->top;
-        stack->top = current->next;
-        current->next = NULL;
-        --(stack->size);
-        double value = current->value;
-        deleteStackElement(current);
-        return value;
+    if (isEmpty(stack)) {
+        return NULL;
     }
+    StackElement* current = stack->top;
+    stack->top = current->next;
+    current->next = NULL;
+    --(stack->size);
+    return current;
+}
+
+double getValue(StackElement* element)
+{
+    return element->value;
 }
 
 void deleteStackElement(StackElement* stackElement)
