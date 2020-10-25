@@ -10,7 +10,7 @@ int main()
     scanf("%llu", &number);
     int digitsInNumber = getNumberLength(number);
     int* generatedNumber = malloc(digitsInNumber * sizeof(int));
-    generatedNumber = splitDigits(number, generatedNumber, digitsInNumber);
+    splitDigits(number, generatedNumber, digitsInNumber);
 
     qsort(generatedNumber, digitsInNumber, sizeof(int), compare);
     int minNoneZeroValue = 0;
