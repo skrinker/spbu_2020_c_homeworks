@@ -42,3 +42,15 @@ int compare(const void* x1, const void* x2)
 {
     return (*(int*)x1 - *(int*)x2);
 }
+
+int binaryPow(int number, int power)
+{
+    int result = 1;
+    while (number) {
+        if (number & 1)
+            result *= number;
+        number *= number;
+        power >>= 1;
+    }
+    return result;
+}
