@@ -6,6 +6,8 @@ int* splitDigits(unsigned long long number, int array[], int arrayLength);
 int getNumberLength(unsigned long long number);
 int max(int a, int b);
 int min(int a, int b);
+int* splitDigits(unsigned long long number, int array[], int arrayLength);
+int getNumberLength(unsigned long long number);
 int binaryPow(int number, int power);
 
 int compare(const void* x1, const void* x2);
