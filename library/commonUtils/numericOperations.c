@@ -51,4 +51,3 @@ int binaryPow(int a, int n)
     }
     return res;
 }
-
