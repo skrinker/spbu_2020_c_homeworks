@@ -38,7 +38,8 @@ int getNumberLength(int number)
         number /= 10;
     }
     return numberLength;
-=======
+}
+
 int* splitDigits(unsigned long long number, int array[], int arrayLength)
 {
     int i = 0;
