@@ -40,27 +40,6 @@ int getNumberLength(int number)
     return numberLength;
 }
 
-int* splitDigits(unsigned long long number, int array[], int arrayLength)
-{
-    int i = 0;
-    while (number > 0) {
-        ++i;
-        array[arrayLength - i] = number % 10;
-        number = number / 10;
-    }
-    return array;
-}
-
-int getNumberLength(unsigned long long number)
-{
-    int digitsInNumber = 0;
-    while (number > 0) {
-        number /= 10;
-        ++digitsInNumber;
-    }
-    return digitsInNumber;
-}
-
 int compare(const void* x1, const void* x2)
 {
     return (*(int*)x1 - *(int*)x2);
