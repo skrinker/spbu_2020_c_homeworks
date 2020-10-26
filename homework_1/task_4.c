@@ -59,19 +59,12 @@ void printSpiral(int** matrix, int size)
     printf("\n\n");
 }
 
-int main()
+bool isPrime(int number)
 {
-    int size = 0;
-    printf("input matrix size: ");
-    scanf("%d", &size);
-    int** matrix = malloc(size * sizeof(int*));
-    for (int i = 0; i < size; i++)
-        matrix[i] = malloc(size * sizeof(int));
-    fillMatrix(matrix, size);
-
-    printf("spiral output: \n");
-    printSpiral(matrix, size);
-
-    free(matrix);
-    return 0;
+    if (number % 2 == 0)
+        return false;
+    for (int i = 3; i < number / 2; i = i + 2)
+        if (number % i == 0)
+            return false;
+    return true;
 }
