@@ -84,7 +84,7 @@ bool handleRequest(BinarySearchTree* set)
         break;
     }
     default:
-        printf("нет такой команды!");
+        printf("нет такой команды! \n");
         break;
     }
     return true;
