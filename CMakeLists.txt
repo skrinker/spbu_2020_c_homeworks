@@ -9,6 +9,8 @@ set(libraries
     library/commonUtils/intArrayOperations.c
 )
 
+add_library(libraries ${libraries})
+
 add_executable(task_1.5 homework_1/task_5.c)
 target_link_libraries(task_1.5 libraries)
 add_executable(task_1.4 homework_1/task_4.c)
