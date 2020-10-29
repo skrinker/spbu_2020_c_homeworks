@@ -3,7 +3,6 @@ project(spbu_2020_c_homeworks C)
 
 set(CMAKE_C_STANDARD 11)
 
-
 set(libraries
     library/commonUtils/numericOperations.c
     library/commonUtils/intArrayOperations.c
@@ -11,6 +10,8 @@ set(libraries
 
 add_library(libraries ${libraries})
 
+add_executable(task_1.3 homework_1/task_3.c)
+target_link_libraries(task_1.3 libraries)
 add_executable(task_1.2 homework_1/task_2.c)
 target_link_libraries(task_1.2 libraries)
 add_executable(task_1.1 homework_1/task_1.c)

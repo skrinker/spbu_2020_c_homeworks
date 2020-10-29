@@ -40,6 +40,11 @@ int getNumberLength(int number)
     return numberLength;
 }
 
+int compare(const void* x1, const void* x2)
+{
+    return (*(int*)x1 - *(int*)x2);
+}
+
 int binaryPow(int a, int n)
 {
     int res = 1;
