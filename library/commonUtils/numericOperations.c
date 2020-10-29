@@ -45,7 +45,7 @@ int compare(const void* x1, const void* x2)
     return (*(int*)x1 - *(int*)x2);
 }
 
-int binaryPow(int a, int n)
+int binaryPow(int number, int power)
 {
     int result = 1;
     while (power > 0) {
@@ -54,5 +54,5 @@ int binaryPow(int a, int n)
         number *= number;
         power >>= 1;
     }
-    return res;
+    return result;
 }
