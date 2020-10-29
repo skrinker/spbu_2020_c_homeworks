@@ -2,7 +2,6 @@
 #include "../library/commonUtils/numericOperations.h"
 #include "stdio.h"
 #include "stdlib.h"
-#define n 7
 
 int findRepeatedMax(int arr[], int r)
 {
