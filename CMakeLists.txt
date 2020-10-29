@@ -1,3 +1,4 @@
+
 cmake_minimum_required(VERSION 3.17)
 project(spbu_2020_c_homeworks C)
 
@@ -30,9 +31,9 @@ target_link_libraries(task_2.1 libraries)
 add_executable(task_1.5 homework_1/task_5.c)
 target_link_libraries(task_1.5 libraries)
 add_executable(task_1.4 homework_1/task_4.c)
+target_link_libraries(task_1.4 libraries)
 add_executable(task_1.3 homework_1/task_3.c)
 target_link_libraries(task_1.3 libraries)
 add_executable(task_1.2 homework_1/task_2.c)
 target_link_libraries(task_1.2 libraries)
 add_executable(task_1.1 homework_1/task_1.c)
-

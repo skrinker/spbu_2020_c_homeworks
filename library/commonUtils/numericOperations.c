@@ -20,21 +20,24 @@ void swap(int* a, int* b)
 void splitDigits(unsigned long long number, int array[], int arrayLength)
 {
     int i = 0;
+    if (arrayLength > getNumberLength(number)) {
+        array[0] = 0;
+    }
     while (number > 0) {
         ++i;
         array[arrayLength - i] = number % 10;
-        number = number / 10;
+        number /= 10;
     }
 }
 
 int getNumberLength(unsigned long long number)
 {
-    int digitsInNumber = 0;
+    int numberLength = 0;
     while (number > 0) {
+        ++numberLength;
         number /= 10;
-        ++digitsInNumber;
     }
-    return digitsInNumber;
+    return numberLength;
 }
 
 int compare(const void* x1, const void* x2)
@@ -42,7 +45,7 @@ int compare(const void* x1, const void* x2)
     return (*(int*)x1 - *(int*)x2);
 }
 
-int binaryPow(int number, int power)
+int binaryPow(int a, int n)
 {
     int result = 1;
     while (power > 0) {
@@ -51,5 +54,5 @@ int binaryPow(int number, int power)
         number *= number;
         power >>= 1;
     }
-    return result;
+    return res;
 }
