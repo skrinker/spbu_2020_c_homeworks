@@ -17,7 +17,7 @@ void swap(int* a, int* b)
     *b = temp;
 }
 
-void splitDigits(int number, int array[], int arrayLength)
+void splitDigits(unsigned long long number, int array[], int arrayLength)
 {
     int i = 0;
     if (arrayLength > getNumberLength(number)) {
@@ -30,7 +30,7 @@ void splitDigits(int number, int array[], int arrayLength)
     }
 }
 
-int getNumberLength(int number)
+int getNumberLength(unsigned long long number)
 {
     int numberLength = 0;
     while (number > 0) {
