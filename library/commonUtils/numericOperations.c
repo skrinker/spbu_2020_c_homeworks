@@ -17,7 +17,7 @@ void swap(int* a, int* b)
     *b = temp;
 }
 
-int* splitDigits(unsigned long long number, int array[], int arrayLength)
+void splitDigits(unsigned long long number, int array[], int arrayLength)
 {
     int i = 0;
     while (number > 0) {
@@ -25,7 +25,6 @@ int* splitDigits(unsigned long long number, int array[], int arrayLength)
         array[arrayLength - i] = number % 10;
         number = number / 10;
     }
-    return array;
 }
 
 int getNumberLength(unsigned long long number)
