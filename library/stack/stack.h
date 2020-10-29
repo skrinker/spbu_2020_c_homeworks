@@ -11,8 +11,9 @@ Stack* createStack();
 int size(Stack* stack);
 bool isEmpty(Stack* stack);
 void push(Stack* stack, StackElement* newElement);
-double pop(Stack* stack);
+StackElement* pop(Stack* stack);
 void deleteStackElement(StackElement* stackElement);
 void deleteStack(Stack* stack);
+double getValue(StackElement* element);
 
 #endif

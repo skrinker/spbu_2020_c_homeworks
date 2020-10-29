@@ -1,5 +1,6 @@
 #include "stringOperations.h"
 #include "../commonUtils/numericOperations.h"
+#include <string.h>
 
 #define SPACE 32
 #define MULTIPLICATION 42
@@ -44,7 +45,7 @@ int getNumberFromString(char* string, int start, int end)
 {
     int value = 0;
     for (int j = start; j <= end; ++j) {
-        if (isCharNumber(string[j])) {
+        if (isdigit(string[j])) {
             value += (string[j] - '0') * binaryPow(10, end - j);
         }
     }
