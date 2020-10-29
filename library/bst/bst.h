@@ -17,5 +17,6 @@ bool removeValue(BinarySearchTree* tree, int value);
 void printTree(BinaryTreeNode* node, bool isDecreasing);
 BinaryTreeNode* getRoot(BinarySearchTree* tree);
 bool printTreeByFormat(BinarySearchTree* tree);
+BinaryTreeNode* createNode(int value);
 
 #endif

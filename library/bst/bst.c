@@ -2,7 +2,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 
-typedef struct BinaryTreeNode {
+struct BinaryTreeNode {
     int value;
     struct BinaryTreeNode* leftChild;
     struct BinaryTreeNode* rightChild;
