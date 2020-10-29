@@ -17,24 +17,27 @@ void swap(int* a, int* b)
     *b = temp;
 }
 
-void splitDigits(unsigned long long number, int array[], int arrayLength)
+void splitDigits(int number, int array[], int arrayLength)
 {
     int i = 0;
+    if (arrayLength > getNumberLength(number)) {
+        array[0] = 0;
+    }
     while (number > 0) {
         ++i;
         array[arrayLength - i] = number % 10;
-        number = number / 10;
+        number /= 10;
     }
 }
 
-int getNumberLength(unsigned long long number)
+int getNumberLength(int number)
 {
-    int digitsInNumber = 0;
+    int numberLength = 0;
     while (number > 0) {
+        ++numberLength;
         number /= 10;
-        ++digitsInNumber;
     }
-    return digitsInNumber;
+    return numberLength;
 }
 
 int compare(const void* x1, const void* x2)
@@ -44,12 +47,12 @@ int compare(const void* x1, const void* x2)
 
 int binaryPow(int a, int n)
 {
-    int result = 1;
+    int res = 1;
     while (n) {
         if (n & 1)
-            result *= a;
+            res *= a;
         a *= a;
         n >>= 1;
     }
-    return result;
+    return res;
 }
