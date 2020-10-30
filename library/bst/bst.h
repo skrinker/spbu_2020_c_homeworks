@@ -9,6 +9,7 @@ typedef struct BinaryTreeNode BinaryTreeNode;
 BinarySearchTree* createTree();
 BinaryTreeNode* getLeftChild(BinaryTreeNode* node);
 BinaryTreeNode* getRightChild(BinaryTreeNode* node);
+BinarySearchTree* findMinimum(BinaryTreeNode* node);
 int getValue(BinaryTreeNode* node);
 void deleteTree(BinarySearchTree* tree);
 bool exists(BinarySearchTree* tree, int value);

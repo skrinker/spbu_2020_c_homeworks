@@ -79,7 +79,7 @@ bool handleRequest(BinarySearchTree* set)
         printSetByDecrease(set);
         break;
     case 6: {
-        if (printSetByFormat(set))
+        if (!printSetByFormat(set))
             printf("множество пустое, сначала добавьте элементы \n");
         break;
     }
