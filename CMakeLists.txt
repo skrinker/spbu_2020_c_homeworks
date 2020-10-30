@@ -14,6 +14,7 @@ add_library(libraries ${libraries})
 add_library(list library/list/list.c)
 add_library(stack library/stack/stack.c)
 
+add_executable(task_4.3 homework_4/task_3.c)
 add_executable(task_4.2 homework_4/task_2.c)
 add_executable(task_3.2 homework_3/task_2.c)
 target_link_libraries(task_3.2 list)
