@@ -8,5 +8,6 @@ int binaryPow(int a, int n);
 int compare(const void* x1, const void* x2);
 void splitDigits(unsigned long long number, int array[], int arrayLength);
 int getNumberLength(unsigned long long number);
+int compare(const void* x1, const void* x2);
 
 #endif //SPBU_2020_C_NUMERICOPERATIONS_H
