@@ -45,14 +45,14 @@ int compare(const void* x1, const void* x2)
     return (*(int*)x1 - *(int*)x2);
 }
 
-int binaryPow(int a, int n)
+int binaryPow(int number, int power)
 {
-    int res = 1;
-    while (n) {
-        if (n & 1)
-            res *= a;
-        a *= a;
-        n >>= 1;
+    int result = 1;
+    while (power > 0) {
+        if (power & 1)
+            result *= number;
+        number *= number;
+        power >>= 1;
     }
-    return res;
+    return result;
 }

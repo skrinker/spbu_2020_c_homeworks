@@ -7,10 +7,27 @@ set(CMAKE_C_STANDARD 11)
 set(libraries
     library/commonUtils/numericOperations.c
     library/commonUtils/intArrayOperations.c
+    library/commonUtils/stringOperations.c
 )
 
 add_library(libraries ${libraries})
+add_library(list library/list/list.c)
+add_library(stack library/stack/stack.c)
 
+add_executable(task_4.1 homework_4/task_1.c)
+target_link_libraries(task_4.1 libraries stack)
+add_executable(task_3.2 homework_3/task_2.c)
+target_link_libraries(task_3.2 list)
+add_executable(task_3.1 homework_3/task_1.c)
+target_link_libraries(task_3.1 list)
+add_executable(task_2.5 homework_2/task_5.c)
+add_executable(task_2.4 homework_2/task_4.c)
+target_link_libraries(task_2.4 libraries)
+add_executable(task_2.3 homework_2/task_3.c)
+add_executable(task_2.2 homework_2/task_2.c)
+target_link_libraries(task_2.2 libraries)
+add_executable(task_2.1 homework_2/task_1.c)
+target_link_libraries(task_2.1 libraries)
 add_executable(task_1.5 homework_1/task_5.c)
 target_link_libraries(task_1.5 libraries)
 add_executable(task_1.4 homework_1/task_4.c)
