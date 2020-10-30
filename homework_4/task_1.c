@@ -21,6 +21,7 @@ void calculatePostfixOperation(char symbol, Stack* stack)
 {
     StackElement* element1 = pop(stack);
     StackElement* element2 = pop(stack);
+
     double result = calculateOperation(getValue(element1), getValue(element2), symbol);
     deleteStackElement(element1);
     deleteStackElement(element2);
