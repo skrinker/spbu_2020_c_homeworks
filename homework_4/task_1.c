@@ -12,7 +12,7 @@ double calculateOperation(double value1, double value2, char symbol)
         return value2 - value1;
     case '/':
         return value2 / value1;
-    case '8':
+    case '*':
         return value2 * value1;
     }
 }
