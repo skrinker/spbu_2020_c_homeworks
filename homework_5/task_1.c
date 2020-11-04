@@ -42,17 +42,19 @@ void deleteSetValue(BinarySearchTree* set)
 
 void printSetByDecrease(BinarySearchTree* set)
 {
-    printTree(getRoot(set), true);
+    printSubTree(getRoot(set), true);
+    printf("\n");
 }
 
 void printSetByIncrease(BinarySearchTree* set)
 {
-    printTree(getRoot(set), false);
+    printSubTree(getRoot(set), false);
+    printf("\n");
 }
 
-bool printSetByFormat(BinarySearchTree* set)
+bool printSet(BinarySearchTree* set)
 {
-    return printTreeByFormat(set);
+    return printTree(set);
 }
 
 bool handleRequest(BinarySearchTree* set)
@@ -79,7 +81,7 @@ bool handleRequest(BinarySearchTree* set)
         printSetByDecrease(set);
         break;
     case 6: {
-        if (!printSetByFormat(set))
+        if (!printSet(set))
             printf("множество пустое, сначала добавьте элементы \n");
         break;
     }

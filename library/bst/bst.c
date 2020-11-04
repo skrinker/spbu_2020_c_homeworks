@@ -6,11 +6,18 @@ typedef struct BinaryTreeNode {
     int value;
     struct BinaryTreeNode* leftChild;
     struct BinaryTreeNode* rightChild;
-};
+} BinaryTreeNode;
 
 struct BinarySearchTree {
     struct BinaryTreeNode* root;
 };
+
+BinaryTreeNode* getLeftChild(BinaryTreeNode* node);
+BinaryTreeNode* getRightChild(BinaryTreeNode* node);
+BinaryTreeNode* findMinimum(BinaryTreeNode* node);
+BinaryTreeNode* getRoot(BinarySearchTree* tree);
+void printSubTree(BinaryTreeNode* node, bool isDecreasing);
+int getValue(BinaryTreeNode* node);
 
 BinarySearchTree* createTree()
 {
@@ -36,7 +43,7 @@ void deleteTree(BinarySearchTree* tree)
 
 bool existsRecursive(BinaryTreeNode* node, int value)
 {
-    if (getValue(node) == value) {
+    if (value == getValue(node)) {
         return true;
     }
     if (value < getValue(node) && getLeftChild(node) != NULL) {
@@ -153,7 +160,7 @@ void printSymmetricalRecursive(BinaryTreeNode* node)
     printSymmetricalRecursive(getRightChild(node));
 }
 
-BinarySearchTree* findMinimum(BinaryTreeNode* node)
+BinaryTreeNode* findMinimum(BinaryTreeNode* node)
 {
     BinaryTreeNode* current = node;
     while (getLeftChild(current) != NULL) {
@@ -170,35 +177,34 @@ void printSymmetrical(BinarySearchTree* tree)
     printf("\n");
 }
 
-void printTree(BinaryTreeNode* node, bool isDecreasing)
+void printSubTree(BinaryTreeNode* node, bool isDecreasing)
 {
     if (!node) {
-        printf("\n");
         return;
     }
-    isDecreasing ? printTree(getRightChild(node), isDecreasing) : printTree(getLeftChild(node), isDecreasing);
-    printf("%d", getValue(node));
-    isDecreasing ? printTree(getLeftChild(node), isDecreasing) : printTree(getRightChild(node), isDecreasing);
+    isDecreasing ? printSubTree(getRightChild(node), isDecreasing) : printSubTree(getLeftChild(node), isDecreasing);
+    printf("%d ", getValue(node));
+    isDecreasing ? printSubTree(getLeftChild(node), isDecreasing) : printSubTree(getRightChild(node), isDecreasing);
 }
 
-void printTreeByFormatRecursive(BinaryTreeNode* node)
+void printTreeRecursive(BinaryTreeNode* node)
 {
     if (!node) {
         printf("null");
         return;
     }
     printf("(%d ", getValue(node));
-    printTreeByFormatRecursive(getLeftChild(node));
+    printTreeRecursive(getLeftChild(node));
     printf(" ");
-    printTreeByFormatRecursive(getRightChild(node));
+    printTreeRecursive(getRightChild(node));
     printf(")");
 }
 
-bool printTreeByFormat(BinarySearchTree* tree)
+bool printTree(BinarySearchTree* tree)
 {
     if (!getRoot(tree))
         return false;
-    printTreeByFormatRecursive(getRoot(tree));
+    printTreeRecursive(getRoot(tree));
     printf("\n");
     return true;
 }
