@@ -12,12 +12,19 @@ struct BinarySearchTree {
     struct BinaryTreeNode* root;
 };
 
+enum Direction {
+    left,
+    right,
+    none
+};
+
 BinaryTreeNode* getLeftChild(BinaryTreeNode* node);
 BinaryTreeNode* getRightChild(BinaryTreeNode* node);
-BinaryTreeNode* findMinimum(BinaryTreeNode* node);
+BinaryTreeNode* findMinimumParent(BinaryTreeNode* node);
 BinaryTreeNode* getRoot(BinarySearchTree* tree);
 void printSubTree(BinaryTreeNode* node, bool isDecreasing);
 int getValue(BinaryTreeNode* node);
+bool removeRecursive(BinarySearchTree* tree, BinaryTreeNode* node, BinaryTreeNode* parent, int value, enum Direction direction);
 
 BinarySearchTree* createTree()
 {
@@ -68,6 +75,20 @@ bool exists(BinarySearchTree* tree, int value)
     return existsRecursive(tree->root, value);
 }
 
+bool changeParent(BinarySearchTree* tree, BinaryTreeNode* parent, BinaryTreeNode* newNode, enum Direction direction)
+{
+    if (direction == left) {
+        parent->leftChild = newNode;
+    }
+    if (direction == right) {
+        parent->rightChild = newNode;
+    }
+    if (direction == none) {
+        tree->root = newNode;
+    }
+    return true;
+}
+
 BinaryTreeNode* createNode(int value)
 {
     BinaryTreeNode* node = (BinaryTreeNode*)malloc(sizeof(BinaryTreeNode));
@@ -111,43 +132,42 @@ bool isLeaf(BinaryTreeNode* node)
     return getLeftChild(node) == NULL && getRightChild(node) == NULL;
 }
 
-BinaryTreeNode* removeRecursive(BinarySearchTree* tree, BinaryTreeNode* node, int value)
+bool removeRecursive(BinarySearchTree* tree, BinaryTreeNode* node, BinaryTreeNode* parent, int value, enum Direction direction)
 {
-    if (node == NULL)
-        return node;
-    if (value < getValue(node)) {
-        node->leftChild = removeRecursive(tree, getLeftChild(node), value);
-    } else if (value > getValue(node)) {
-        node->rightChild = removeRecursive(tree, getRightChild(node), value);
-    } else {
-        if (getLeftChild(node) == NULL) {
-            if (getValue(getRoot(tree)) == value)
-                tree->root = getRightChild(node);
-            BinaryTreeNode* temp = getRightChild(node);
-            free(node);
-            return temp;
-        } else if (getRightChild(node) == NULL) {
-            if (getValue(getRoot(tree)) == value)
-                tree->root = getLeftChild(node);
-            BinaryTreeNode* temp = getLeftChild(node);
-            free(node);
-            return temp;
+    if (isEmpty(tree) || !exists(tree, value))
+        return false;
+    if (node->value == value) {
+        if (isLeaf(node))
+            changeParent(tree, parent, NULL, direction);
+        if (node->leftChild == NULL && node->rightChild != NULL)
+            changeParent(tree, parent, node->rightChild, direction);
+        if (node->leftChild != NULL && node->rightChild == NULL)
+            changeParent(tree, parent, node->leftChild, direction);
+        if (node->leftChild != NULL && node->rightChild != NULL) {
+            BinaryTreeNode* minimumRightParent = findMinimumParent(getRightChild(node));
+            minimumRightParent->leftChild->leftChild = node->leftChild;
+            minimumRightParent->leftChild = NULL;
+            if (parent == NULL) {
+                tree->root = getLeftChild(minimumRightParent);
+            } else {
+                changeParent(tree, parent, getLeftChild(minimumRightParent), direction);
+            }
         }
-        BinaryTreeNode* temp = findMinimum(getRightChild(node));
-        node->value = getValue(temp);
-        free(temp);
-        node->rightChild = removeRecursive(tree, getRightChild(node), getValue(node));
+        free(node);
+        return true;
     }
-    return node;
+    if (node->value > value && node->leftChild != NULL) {
+        return removeRecursive(tree, node->leftChild, node, value, left);
+    }
+    if (node->value < value && node->rightChild != NULL) {
+        return removeRecursive(tree, node->rightChild, node, value, right);
+    }
+    return false;
 }
 
 bool removeValue(BinarySearchTree* tree, int value)
 {
-    if (isEmpty(tree)) {
-        return false;
-    }
-    removeRecursive(tree, tree->root, value);
-    return true;
+    return removeRecursive(tree, tree->root, NULL, value, none);
 }
 
 void printSymmetricalRecursive(BinaryTreeNode* node)
@@ -160,10 +180,10 @@ void printSymmetricalRecursive(BinaryTreeNode* node)
     printSymmetricalRecursive(getRightChild(node));
 }
 
-BinaryTreeNode* findMinimum(BinaryTreeNode* node)
+BinaryTreeNode* findMinimumParent(BinaryTreeNode* node)
 {
     BinaryTreeNode* current = node;
-    while (getLeftChild(current) != NULL) {
+    while (getLeftChild(getLeftChild(current)) != NULL) {
         current = getLeftChild(current);
     }
     return current;
