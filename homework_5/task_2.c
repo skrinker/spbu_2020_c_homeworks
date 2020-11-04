@@ -5,4 +5,5 @@
 int main()
 {
     BinaryTreeNode* node = createNode(30);
+    TreeNode* nodeAVL = createNodeAVL(node);
 }

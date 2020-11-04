@@ -1,14 +1,16 @@
 #include "avl.h"
 
-typedef struct TreeNode {
-    BinaryTreeNode* bst;
-    int height;
-} TreeNode;
+struct AVLTree {
+    BinarySearchTree* bst;
+    TreeNode* root;
+};
 
-TreeNode* createNodeAVL(BinaryTreeNode* bst)
+AVLTree* createAVLTree()
 {
-    TreeNode* node = malloc(sizeof(TreeNode));
-    node->bst = bst;
-    node->height = 0;
-    return node;
+    BinarySearchTree* bstTree = createTree();
+    AVLTree* tree = (AVLTree*)malloc(sizeof(AVLTree));
+    tree->root = NULL;
+    tree->bst = bstTree;
+
+    return tree;
 }

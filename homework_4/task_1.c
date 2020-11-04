@@ -19,9 +19,12 @@ double calculateOperation(double value1, double value2, char symbol)
 
 void calculatePostfixOperation(char symbol, Stack* stack)
 {
-    double value1 = pop(stack);
-    double value2 = pop(stack);
-    double result = calculateOperation(value1, value2, symbol);
+    StackElement* element1 = pop(stack);
+    StackElement* element2 = pop(stack);
+
+    double result = calculateOperation(getValue(element1), getValue(element2), symbol);
+    deleteStackElement(element1);
+    deleteStackElement(element2);
     push(stack, createStackElement(result));
 }
 
@@ -31,7 +34,7 @@ void addNumberToPostfix(int lastNonSpaceIndex, int index, Stack* stack, char exp
     push(stack, createStackElement(value));
 }
 
-double evaluatePostfix(char* expression, Stack* stack)
+void evaluatePostfix(char* expression, Stack* stack)
 {
     int expressionSize = strlen(expression);
     int lastNonSpaceIndex = 0;
@@ -46,7 +49,6 @@ double evaluatePostfix(char* expression, Stack* stack)
             continue;
         }
     }
-    return pop(stack);
 }
 
 int main()
@@ -54,9 +56,12 @@ int main()
     printf("Please input postfix expression: \n");
     char* inputString = getString();
     Stack* stack = createStack();
-    printf("result: %f \n", evaluatePostfix(inputString, stack));
+    evaluatePostfix(inputString, stack);
+    StackElement* result = pop(stack);
+    printf("result: %f \n", getValue(result));
     printf("Thank you for using my calculator \n");
     deleteStack(stack);
+    deleteStackElement(result);
     free(inputString);
     return 0;
 }

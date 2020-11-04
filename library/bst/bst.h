@@ -1,3 +1,4 @@
+#include "bstNode.h"
 #include <stdbool.h>
 
 #ifndef __BST_H__
@@ -12,5 +13,6 @@ bool exists(BinarySearchTree* tree, int value);
 bool addValue(BinarySearchTree* tree, int value);
 bool removeValue(BinarySearchTree* tree, int value);
 bool printTree(BinarySearchTree* tree);
+BinaryTreeNode* getRoot(BinarySearchTree* tree);
 
 #endif
