@@ -5,5 +5,4 @@
 int main()
 {
     BinaryTreeNode* node = createNode(30);
-    
 }
