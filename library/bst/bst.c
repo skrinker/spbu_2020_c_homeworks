@@ -162,31 +162,12 @@ void printSymmetricalRecursive(BinaryTreeNode* node)
     printSymmetricalRecursive(getRightChild(node));
 }
 
-BinaryTreeNode* findMinimumParent(BinaryTreeNode* node)
-{
-    BinaryTreeNode* current = node;
-    while (getLeftChild(getLeftChild(current)) != NULL) {
-        current = getLeftChild(current);
-    }
-    return current;
-}
-
 void printSymmetrical(BinarySearchTree* tree)
 {
     printf("Here's your tree: ");
     if (tree != NULL)
         printSymmetricalRecursive(tree->root);
     printf("\n");
-}
-
-void printSubTree(BinaryTreeNode* node, bool isDecreasing)
-{
-    if (!node) {
-        return;
-    }
-    isDecreasing ? printSubTree(getRightChild(node), isDecreasing) : printSubTree(getLeftChild(node), isDecreasing);
-    printf("%d ", getValue(node));
-    isDecreasing ? printSubTree(getLeftChild(node), isDecreasing) : printSubTree(getRightChild(node), isDecreasing);
 }
 
 void printTreeRecursive(BinaryTreeNode* node)

@@ -19,7 +19,7 @@ add_library(avl library/avl/avl.c)
 add_library(avlNode library/avl/avlNode.c)
 
 add_executable(task_5.2 homework_5/task_2.c)
-target_link_libraries(task_5.2 bst bstNode avl avlNode)
+target_link_libraries(task_5.2 avl avlNode libraries)
 add_executable(task_5.1 homework_5/task_1.c)
 target_link_libraries(task_5.1 bst bstNode)
 add_executable(task_4.3 homework_4/task_3.c)
