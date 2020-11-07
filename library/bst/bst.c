@@ -127,10 +127,16 @@ bool removeRecursive(BinarySearchTree* tree, BinaryTreeNode* node, BinaryTreeNod
             changeParent(tree, parent, getLeftChild(node), direction);
         if (getLeftChild(node) != NULL && getRightChild(node) != NULL) {
             BinaryTreeNode* minimumRightParent = findMinimumParent(getRightChild(node));
-            updateLeftChild(getLeftChild(minimumRightParent), getLeftChild(node));
-            updateLeftChild(minimumRightParent, NULL);
             if (parent == NULL) {
-                tree->root = getLeftChild(minimumRightParent);
+                if (getLeftChild(minimumRightParent) == NULL) {
+                    updateLeftChild(minimumRightParent, getLeftChild(node));
+                    tree->root = minimumRightParent;
+                } else {
+                    updateLeftChild(getLeftChild(minimumRightParent), getLeftChild(node));
+                    updateRightChild(getLeftChild(minimumRightParent), minimumRightParent);
+                    tree->root = getLeftChild(minimumRightParent);
+                    updateLeftChild(minimumRightParent, NULL);
+                }
             } else {
                 changeParent(tree, parent, getLeftChild(minimumRightParent), direction);
             }
