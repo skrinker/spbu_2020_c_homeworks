@@ -39,22 +39,3 @@ void updateLeftChild(BinaryTreeNode* node, BinaryTreeNode* newNode)
 {
     node->leftChild = newNode;
 }
-
-BinaryTreeNode* findMinimumParent(BinaryTreeNode* node)
-{
-    BinaryTreeNode* current = node;
-    while (getLeftChild(getLeftChild(current)) != NULL) {
-        current = getLeftChild(current);
-    }
-    return current;
-}
-
-void printSubTree(BinaryTreeNode* node, bool isDecreasing)
-{
-    if (!node) {
-        return;
-    }
-    isDecreasing ? printSubTree(getRightChild(node), isDecreasing) : printSubTree(getLeftChild(node), isDecreasing);
-    printf("%d ", getValue(node));
-    isDecreasing ? printSubTree(getLeftChild(node), isDecreasing) : printSubTree(getRightChild(node), isDecreasing);
-}

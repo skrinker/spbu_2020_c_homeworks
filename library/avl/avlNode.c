@@ -10,7 +10,7 @@ struct TreeNode {
 TreeNode* createNode(int value)
 {
     TreeNode* node = malloc(sizeof(TreeNode));
-    node->height = 0;
+    node->height = 1;
     node->right = NULL;
     node->left = NULL;
     node->value = value;
@@ -19,15 +19,13 @@ TreeNode* createNode(int value)
 
 TreeNode* getLeftChild(TreeNode* node)
 {
-    return node->left;
+    return node ? node->left : NULL;
 }
 
 TreeNode* getRightChild(TreeNode* node)
 {
-    return node->right;
+    return node ? node->right : NULL;
 };
-
-TreeNode* findMinimumParent(TreeNode* node);
 
 int getValue(TreeNode* node)
 {
@@ -74,55 +72,53 @@ void updateHeight(TreeNode* node, int newHeight)
 
 TreeNode* rightRotate(TreeNode* node)
 {
-    TreeNode* rotateChild = getLeftChild(node);
-    TreeNode* rightRotateChild = getRightChild(rotateChild);
+    TreeNode* pivot = getLeftChild(node);
 
-    updateRightChild(rotateChild, node);
-    updateLeftChild(node, rightRotateChild);
+    updateLeftChild(node, getRightChild(pivot));
+    updateRightChild(pivot, node);
 
-    updateHeight(node, max(getHeight(getLeftChild(node)), getHeight(getRightChild(node))) + 1);
-    updateHeight(rotateChild, max(getHeight(getLeftChild(rotateChild)), getHeight(getRightChild(rotateChild))) + 1);
+    fixHeight(node);
+    fixHeight(pivot);
 
-    return node;
+    return pivot;
 }
 
 TreeNode* leftRotate(TreeNode* node)
 {
-    TreeNode* rotateChild = getRightChild(node);
-    TreeNode* leftRotateChild = getLeftChild(rotateChild);
+    TreeNode* pivot = getRightChild(node);
 
-    updateLeftChild(rotateChild, node);
-    updateRightChild(node, leftRotateChild);
+    updateRightChild(node, getLeftChild(pivot));
+    updateLeftChild(pivot, node);
 
-    updateHeight(node, max(getHeight(getLeftChild(node)), getHeight(getRightChild(node))) + 1);
-    updateHeight(rotateChild, max(getHeight(getLeftChild(rotateChild)), getHeight(getRightChild(rotateChild))) + 1);
+    fixHeight(node);
+    fixHeight(pivot);
 
-    return node;
+    return pivot;
 }
 
 int getBalance(TreeNode* node)
 {
-    return (node == NULL) ? 0 : getHeight(getLeftChild(node)) - getHeight(getRightChild(node));
+    return (node == NULL) ? 0 : getHeight(getRightChild(node)) - getHeight(getLeftChild(node));
 }
 
-TreeNode* balance(TreeNode* node, int balance)
+void fixHeight(TreeNode* node)
 {
-    //left left
-    if (balance > 1 && getValue(node) < getValue(getLeftChild(node))) {
-        return rightRotate(node);
+    updateHeight(node, 1 + max(getHeight(getLeftChild(node)), getHeight(getRightChild(node))));
+}
+
+TreeNode* balanceNode(TreeNode* node)
+{
+    if (getBalance(node) == 2) {
+        if (getBalance(getRightChild(node)) < 0) {
+            updateRightChild(node, rightRotate(getRightChild(node)));
+        }
+        node = leftRotate(node);
     }
-    // left right
-    if (balance > 1 && getValue(node) > getValue(getLeftChild(node))) {
-        updateLeftChild(getLeftChild(node), leftRotate(getLeftChild(node)));
-        return rightRotate(node);
+    if (getBalance(node) == -2) {
+        if (getBalance(getLeftChild(node)) > 0) {
+            updateLeftChild(node, rightRotate(getLeftChild(node)));
+        }
+        node = rightRotate(node);
     }
-    // right right
-    if (balance < -1 && getValue(node) > getValue(getRightChild(node))) {
-        return leftRotate(node);
-    }
-    // right left
-    if (balance < -1 && getValue(node) < getValue(getRightChild(node))) {
-        updateRightChild(getRightChild(node), rightRotate(getRightChild(node)));
-        return leftRotate(node);
-    }
+    return node;
 }

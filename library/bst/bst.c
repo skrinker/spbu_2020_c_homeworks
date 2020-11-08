@@ -1,4 +1,5 @@
 #include "bst.h"
+#include "bstNode.h"
 #include <stdio.h>
 #include <stdlib.h>
 
@@ -127,10 +128,16 @@ bool removeRecursive(BinarySearchTree* tree, BinaryTreeNode* node, BinaryTreeNod
             changeParent(tree, parent, getLeftChild(node), direction);
         if (getLeftChild(node) != NULL && getRightChild(node) != NULL) {
             BinaryTreeNode* minimumRightParent = findMinimumParent(getRightChild(node));
-            updateLeftChild(getLeftChild(minimumRightParent), getLeftChild(node));
-            updateLeftChild(minimumRightParent, NULL);
             if (parent == NULL) {
-                tree->root = getLeftChild(minimumRightParent);
+                if (getLeftChild(minimumRightParent) == NULL) {
+                    updateLeftChild(minimumRightParent, getLeftChild(node));
+                    tree->root = minimumRightParent;
+                } else {
+                    updateLeftChild(getLeftChild(minimumRightParent), getLeftChild(node));
+                    updateRightChild(getLeftChild(minimumRightParent), minimumRightParent);
+                    tree->root = getLeftChild(minimumRightParent);
+                    updateLeftChild(minimumRightParent, NULL);
+                }
             } else {
                 changeParent(tree, parent, getLeftChild(minimumRightParent), direction);
             }
@@ -162,12 +169,31 @@ void printSymmetricalRecursive(BinaryTreeNode* node)
     printSymmetricalRecursive(getRightChild(node));
 }
 
+BinaryTreeNode* findMinimumParent(BinaryTreeNode* node)
+{
+    BinaryTreeNode* current = node;
+    while (getLeftChild(getLeftChild(current)) != NULL) {
+        current = getLeftChild(current);
+    }
+    return current;
+}
+
 void printSymmetrical(BinarySearchTree* tree)
 {
     printf("Here's your tree: ");
     if (tree != NULL)
         printSymmetricalRecursive(tree->root);
     printf("\n");
+}
+
+void printSubTree(BinaryTreeNode* node, bool isDecreasing)
+{
+    if (!node) {
+        return;
+    }
+    isDecreasing ? printSubTree(getRightChild(node), isDecreasing) : printSubTree(getLeftChild(node), isDecreasing);
+    printf("%d ", getValue(node));
+    isDecreasing ? printSubTree(getLeftChild(node), isDecreasing) : printSubTree(getRightChild(node), isDecreasing);
 }
 
 void printTreeRecursive(BinaryTreeNode* node)

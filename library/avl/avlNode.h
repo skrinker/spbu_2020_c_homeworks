@@ -22,5 +22,7 @@ void updateHeight(TreeNode* node, int newHeight);
 TreeNode* leftRotate(TreeNode* node);
 TreeNode* rightRotate(TreeNode* node);
 
-TreeNode* balance(TreeNode* node, int balance);
+TreeNode* balanceNode(TreeNode* node);
 int getBalance(TreeNode* node);
+
+void fixHeight(TreeNode* node);
