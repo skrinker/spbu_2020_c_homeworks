@@ -56,3 +56,28 @@ int binaryPow(int power, int number)
     }
     return result;
 }
+
+int getFibonachiNumber(int** matrix, int** result, int** firstMatrix, int index)
+{
+
+    if (index < 0)
+        return -1;
+    while (index > 0) {
+        for (int i = 0; i < 2; i++) {
+            for (int j = 0; j < 2; j++) {
+                for (int k = 0; k < 2; k++) {
+                    result[i][j] += firstMatrix[i][k] * matrix[k][j];
+                }
+            }
+        }
+        for (int i = 0; i < 2; i++) {
+            for (int j = 0; j < 2; j++) {
+                matrix[i][j] = result[i][j];
+                result[i][j] = 0;
+            }
+        }
+        index--;
+    }
+
+    return matrix[0][0];
+}
