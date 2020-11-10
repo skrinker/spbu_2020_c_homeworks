@@ -19,6 +19,7 @@ add_library(avl library/avl/avl.c)
 add_library(avlNode library/avl/avlNode.c)
 add_library(hashtable library/hashtable/hashtable.c)
 
+add_executable(test_2.2 test_2/task_2.c)
 add_executable(test_2.1 test_2/task_1.c)
 target_link_libraries(test_2.1 libraries)
 add_executable(task_6.1 homework_6/task_1.c)
