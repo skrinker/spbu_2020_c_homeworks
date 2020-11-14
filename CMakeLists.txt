@@ -17,7 +17,7 @@ add_library(bst library/bst/bst.c)
 add_library(bstNode library/bst/bstNode.c)
 add_library(avl library/avl/avl.c)
 add_library(avlNode library/avl/avlNode.c)
-add_library(hashtable library/hashtable/hashtable.c)
+add_library(hashtable library/hashtable/hashTable.c)
 
 add_executable(task_6.1 homework_6/task_1.c)
 target_link_libraries(task_6.1 hashtable)
