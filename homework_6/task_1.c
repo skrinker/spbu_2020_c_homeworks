@@ -33,11 +33,13 @@ int main()
         return 0;
     }
 
-    while (word = readWordFromFile((FILE*)inputFile)) {
+    word = readWordFromFile((FILE*)inputFile);
+    while (word) {
         convertWordToLowerCase(word);
         if (word[0] != '\0')
             addValue(table, word, 1, 1);
         free(word);
+        word = readWordFromFile((FILE*)inputFile);
     }
 
     printInfo(table, 10);
