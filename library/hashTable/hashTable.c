@@ -27,15 +27,32 @@ const float maxLoadFactor = 0.7;
 
 void deleteHashElement(HashElement* element);
 HashElement* createHashElement(char* key, int value, int numberOfProbes);
+int getHash(char* key, int polynomFactor, int module);
+int getCurrentIndex(int hash, int currentNumberOfProbes, int module);
+float getLoadFactor(HashTable* hashTable);
+int getValue(HashTable* table, char* key);
+double getAverageNumberOfProbes(HashTable* table);
+char** getMostRepeatedKeys(HashTable* table, char** result, int number);
+int getBucketCount(HashTable* table);
+int getElementCount(HashTable* table);
+int getMaximumProbes(HashTable* table);
+void printKeysWithValues(HashTable* table);
+void printMaximumRepeats(HashTable* table);
 
 float getLoadFactor(HashTable* hashTable)
 {
     return (float)hashTable->elementCount / (float)hashTable->bucketCount;
 }
 
-int getBucketCount(HashTable* table) { return table->bucketCount; }
+int getBucketCount(HashTable* table)
+{
+    return table->bucketCount;
+}
 
-int getElementCount(HashTable* table) { return table->elementCount; }
+int getElementCount(HashTable* table)
+{
+    return table->elementCount;
+}
 
 HashElement* createHashElement(char* key, int value, int numberOfProbes)
 {
@@ -49,9 +66,7 @@ HashElement* createHashElement(char* key, int value, int numberOfProbes)
     return newElement;
 }
 
-HashTable* createHashTableWithSize(int polynomFactor, int size,
-    HashFunction getHash,
-    GetIndexFunction getCurrentIndex)
+HashTable* createHashTableWithSize(int polynomFactor, int size, HashFunction getHash, GetIndexFunction getCurrentIndex)
 {
     HashTable* newTable = (HashTable*)malloc(sizeof(HashTable));
     newTable->hashTable = (HashElement**)malloc(sizeof(HashElement*) * size);
@@ -66,8 +81,7 @@ HashTable* createHashTableWithSize(int polynomFactor, int size,
     return newTable;
 }
 
-HashTable* createHashTable(int polynomFactor, HashFunction getHash,
-    GetIndexFunction getCurrentIndex)
+HashTable* createHashTable(int polynomFactor, HashFunction getHash, GetIndexFunction getCurrentIndex)
 {
     return createHashTableWithSize(polynomFactor, 1, getHash, getCurrentIndex);
 }
@@ -115,7 +129,7 @@ bool addValue(HashTable* table, char* key, int value, int numberOfProbes)
     if (table == NULL || key == NULL)
         return false;
     int hash = getHash(key, table->polynomFactor, table->bucketCount);
-    int startIndex = getCurrentIndex(table, hash, 1);
+    int startIndex = getCurrentIndex(hash, 1, table->bucketCount);
     int currentIndex = startIndex;
     int currentNumberOfProbes = 1;
     while (table->types[currentIndex] == used) {
@@ -127,7 +141,7 @@ bool addValue(HashTable* table, char* key, int value, int numberOfProbes)
             return true;
         }
         ++currentNumberOfProbes;
-        currentIndex = getCurrentIndex(table, hash, currentNumberOfProbes);
+        currentIndex = getCurrentIndex(hash, currentNumberOfProbes, table->bucketCount);
     }
 
     HashElement* newElement = createHashElement(key, value, numberOfProbes);
@@ -156,7 +170,7 @@ bool removeValue(HashTable* table, char* key)
         return false;
     int currentNumberOfProbes = 1;
     int hash = getHash(key, table->polynomFactor, table->bucketCount);
-    int startIndex = getCurrentIndex(table, hash, currentNumberOfProbes);
+    int startIndex = getCurrentIndex(hash, currentNumberOfProbes, table->bucketCount);
     int currentIndex = startIndex;
     while (table->types[currentIndex] == used) {
         if (strcmp(key, table->hashTable[currentIndex]->key) == 0) {
@@ -166,7 +180,7 @@ bool removeValue(HashTable* table, char* key)
             return true;
         }
         ++currentNumberOfProbes;
-        currentIndex = getCurrentIndex(table, hash, currentNumberOfProbes);
+        currentIndex = getCurrentIndex(hash, currentNumberOfProbes, table->bucketCount);
         if (currentIndex == startIndex)
             break;
     }
@@ -177,7 +191,7 @@ bool removeValue(HashTable* table, char* key)
 int getValue(HashTable* table, char* key)
 {
     int hash = getHash(key, table->polynomFactor, table->bucketCount);
-    int startIndex = getCurrentIndex(table, hash, 1);
+    int startIndex = getCurrentIndex(hash, 1, table->bucketCount);
     int currentIndex = startIndex;
     while (table->types[currentIndex] != empty) {
         if (strcmp(table->hashTable[currentIndex]->key, key) == 0)

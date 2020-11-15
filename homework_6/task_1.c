@@ -8,7 +8,7 @@
 
 int getHash(char* key, int polynomFactor, int module)
 {
-    int size = strlen(key);
+    int size = (int)strlen(key);
     int currentHash = 0;
     for (int i = 0; i < size; ++i) {
         currentHash = ((currentHash * polynomFactor) + (key[i] - 'a')) % module;
@@ -16,16 +16,16 @@ int getHash(char* key, int polynomFactor, int module)
     return currentHash;
 }
 
-int getCurrentIndex(HashTable* table, int hash, int currentNumberOfProbes)
+int getCurrentIndex(int hash, int currentNumberOfProbes, int module)
 {
-    return (hash + ((currentNumberOfProbes - 1) * currentNumberOfProbes) / 2) % getBucketCount(table);
+    return (hash + ((currentNumberOfProbes - 1) * currentNumberOfProbes) / 2) % module;
 }
 
 int main()
 {
     HashTable* table = createHashTable(2, getHash, getCurrentIndex);
 
-    FILE* inputFile = fopen("./homework_6/test.txt", "r");
+    FILE* inputFile = fopen("./homework_6/test.txt", "re");
     char* word = NULL;
 
     if (inputFile == NULL) {
