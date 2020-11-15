@@ -148,7 +148,7 @@ bool addValue(HashTable* table, char* key, int value, int numberOfProbes)
     newElement->numberOfProbes = currentNumberOfProbes;
     table->hashTable[currentIndex] = newElement;
     table->types[currentIndex] = used;
-    table->elementCount++;
+    ++(table->elementCount);
 
     if (getLoadFactor(table) > maxLoadFactor)
         expandTable(table);
@@ -233,7 +233,7 @@ void printKeysWithValues(HashTable* table)
         printf("Table is empty \n");
         return;
     }
-    for (int i = 0; i < table->bucketCount; i++) {
+    for (int i = 0; i < table->bucketCount; ++i) {
         if (table->types[i] == used) {
             printf("%s: %d \n", table->hashTable[i]->key, table->hashTable[i]->value);
         }
