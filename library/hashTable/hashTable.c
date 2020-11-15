@@ -172,7 +172,8 @@ bool removeValue(HashTable* table, char* key)
     int hash = getHash(key, table->polynomFactor, table->bucketCount);
     int startIndex = getCurrentIndex(hash, currentNumberOfProbes, table->bucketCount);
     int currentIndex = startIndex;
-    while (table->types[currentIndex] == used) {
+    printf("%d", table->types[currentIndex]);
+    while (table->types[currentIndex] != empty) {
         if (strcmp(key, table->hashTable[currentIndex]->key) == 0) {
             table->types[currentIndex] = deleted;
             deleteHashElement(table->hashTable[currentIndex]);

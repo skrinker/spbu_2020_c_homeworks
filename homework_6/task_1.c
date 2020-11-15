@@ -25,7 +25,7 @@ int main()
 {
     HashTable* table = createHashTable(2, getHash, getCurrentIndex);
 
-    FILE* inputFile = fopen("./homework_6/test.txt", "re");
+    FILE* inputFile = fopen("/home/skrinker/spbu_2020_c_homeworks/homework_6/test.txt", "re");
     char* word = NULL;
 
     if (inputFile == NULL) {
@@ -41,6 +41,8 @@ int main()
         free(word);
         word = readWordFromFile((FILE*)inputFile);
     }
+
+    removeValue(table, "two");
 
     printInfo(table, 10);
 
