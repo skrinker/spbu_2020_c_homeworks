@@ -1,3 +1,5 @@
+#include "../library/IO/io.h"
+#include "../library/commonUtils/stringOperations.h"
 #include "../library/hashTable/hashTable.h"
 #include <ctype.h>
 #include <stdio.h>
@@ -14,50 +16,35 @@ int getHash(char* key, int polynomFactor, int module)
     return currentHash;
 }
 
-char* convertWordToLowerCase(char* word)
+int getCurrentIndex(HashTable* table, int hash, int currentNumberOfProbes)
 {
-    for (int i = 0; i < strlen(word); i++) {
-        word[i] = tolower(word[i]);
-    }
-    return word;
-}
-
-void removeSpecialSymbols(char* word, char* specialSymbols)
-{
-    for (int i = 0; i < strlen(word); i++)
-        for (int j = 0; j < strlen(specialSymbols); j++)
-            if (word[i] == specialSymbols[j])
-                memmove(&word[i], &word[i + 1], strlen(word) - i);
+    return (hash + ((currentNumberOfProbes - 1) * currentNumberOfProbes) / 2) % getBucketCount(table);
 }
 
 int main()
 {
-    HashTable* table = createHashTable(2, *getHash);
+    HashTable* table = createHashTable(2, getHash, getCurrentIndex);
 
-    FILE* inputFile = fopen("./homework_6/test.txt", "r");
-    char* buffer = malloc(500 * sizeof(char));
+    FILE* inputFile = fopen("/home/skrinker/spbu_2020_c_homeworks/homework_6/test.txt", "r");
     char* word = NULL;
-    char specialSymbols[] = { '!', '?', '(', ')', ';', '.', ',', '"', ':', '[', ']', '\n' };
+
     if (inputFile == NULL) {
         printf("Cannot open file.\n");
+        return 0;
     }
 
-    while (fgets(buffer, 255, (FILE*)inputFile) != NULL) {
-        word = strtok(buffer, " -");
-        while (word != NULL) {
-            removeSpecialSymbols(word, specialSymbols);
-            word = convertWordToLowerCase(word);
+    while (word = readWordFromFile((FILE*)inputFile)) {
+        convertWordToLowerCase(word);
+        if (word[0] != '\0')
             addValue(table, word, 1, 1);
-            word = strtok(NULL, " ");
-        }
+        free(word);
     }
 
-    printInfo(table);
+    printInfo(table, 10);
 
     destroyHashTable(table);
     free(word);
     fclose(inputFile);
-    free(buffer);
 
     return 0;
 }

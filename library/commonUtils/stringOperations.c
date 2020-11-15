@@ -51,3 +51,15 @@ int getNumberFromString(char* string, int start, int end)
     }
     return value;
 }
+
+char* convertWordToLowerCase(char* word)
+{
+    for (int i = 0; i < strlen(word); i++) {
+        word[i] = tolower(word[i]);
+    }
+}
+
+bool isAlphabet(char symbol)
+{
+    return (symbol >= 'a' && symbol <= 'z') || (symbol >= 'A' && symbol <= 'Z');
+}
