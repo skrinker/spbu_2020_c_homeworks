@@ -42,8 +42,6 @@ int main()
         word = readWordFromFile((FILE*)inputFile);
     }
 
-    removeValue(table, "two");
-
     printInfo(table, 10);
 
     destroyHashTable(table);
