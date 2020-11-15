@@ -33,15 +33,9 @@ float getLoadFactor(HashTable* hashTable)
     return (float)hashTable->elementCount / (float)hashTable->bucketCount;
 }
 
-int getBucketCount(HashTable* table)
-{
-    return table->bucketCount;
-}
+int getBucketCount(HashTable* table) { return table->bucketCount; }
 
-int getElementCount(HashTable* table)
-{
-    return table->elementCount;
-}
+int getElementCount(HashTable* table) { return table->elementCount; }
 
 HashElement* createHashElement(char* key, int value, int numberOfProbes)
 {
@@ -55,7 +49,9 @@ HashElement* createHashElement(char* key, int value, int numberOfProbes)
     return newElement;
 }
 
-HashTable* createHashTableWithSize(int polynomFactor, int size, HashFunction getHash, GetIndexFunction getCurrentIndex)
+HashTable* createHashTableWithSize(int polynomFactor, int size,
+    HashFunction getHash,
+    GetIndexFunction getCurrentIndex)
 {
     HashTable* newTable = (HashTable*)malloc(sizeof(HashTable));
     newTable->hashTable = (HashElement**)malloc(sizeof(HashElement*) * size);
@@ -70,7 +66,8 @@ HashTable* createHashTableWithSize(int polynomFactor, int size, HashFunction get
     return newTable;
 }
 
-HashTable* createHashTable(int polynomFactor, HashFunction getHash, GetIndexFunction getCurrentIndex)
+HashTable* createHashTable(int polynomFactor, HashFunction getHash,
+    GetIndexFunction getCurrentIndex)
 {
     return createHashTableWithSize(polynomFactor, 1, getHash, getCurrentIndex);
 }
@@ -243,7 +240,8 @@ void printMaximumNumberOfRepeats(HashTable* table, int number)
             }
             counted[maximumIndex] = true;
         }
-        printf("%s: %d \n", table->hashTable[maximumIndex]->key, table->hashTable[maximumIndex]->value);
+        printf("%s: %d \n", table->hashTable[maximumIndex]->key,
+            table->hashTable[maximumIndex]->value);
     }
     free(counted);
 }
@@ -258,5 +256,6 @@ void printInfo(HashTable* table, int number)
     printf("Top %d values: \n", number);
     printMaximumNumberOfRepeats(table, number);
     printf("Number of added words: %d \n", getElementCount(table));
-    printf("Number of empty buckets: %d \n", getBucketCount(table) - getElementCount(table));
+    printf("Number of empty buckets: %d \n",
+        getBucketCount(table) - getElementCount(table));
 }
