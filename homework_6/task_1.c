@@ -34,7 +34,7 @@ int main()
 {
     HashTable* table = createHashTable(2, *getHash);
 
-    FILE* inputFile = fopen("/home/skrinker/spbu_2020_c_homeworks/homework_6/test.txt", "r");
+    FILE* inputFile = fopen("./homework_6/test.txt", "r");
     char* buffer = malloc(500 * sizeof(char));
     char* word = NULL;
     char specialSymbols[] = { '!', '?', '(', ')', ';', '.', ',', '"', ':', '[', ']', '\n' };
