@@ -18,7 +18,7 @@ void printResults(Graph* graph)
         memset(used, 0, sizeof(int) * getCountVertex(graph));
         depthFirstSearch(graph, i, used);
         for (int j = 0; j < getCountVertex(graph); ++j) {
-            if (used[j] == 2) {
+            if (used[j] == 2 && j != i) {
                 printf("%d \t %d \n", j + 1, i + 1);
             }
         }
@@ -26,7 +26,7 @@ void printResults(Graph* graph)
     }
 }
 
-void inputResults(Edge** edges, int numberOfStudents, int* nonEmptyWorks)
+void inputResults(Edge** edges, int numberOfStudents)
 {
     printf("input %d times: <studentNumber> <plagiarizedWork> \n", numberOfStudents);
     for (int i = 0; i < numberOfStudents; ++i) {
@@ -35,7 +35,8 @@ void inputResults(Edge** edges, int numberOfStudents, int* nonEmptyWorks)
         scanf("%d %d", &studentNumber, &plagiarizedWork);
         if (plagiarizedWork != -1) {
             edges[i] = createEdge(plagiarizedWork - 1, studentNumber - 1, 1, true);
-            ++(*nonEmptyWorks);
+        } else {
+            edges[i] = createEdge(studentNumber - 1, studentNumber - 1, 1, true);
         }
     }
 }
@@ -57,11 +58,10 @@ int inputNumberOfStudents()
 int main()
 {
     int numberOfStudents = inputNumberOfStudents();
-    int nonEmptyWorks = 0;
     Edge** edges = malloc(sizeof(Edge*) * numberOfStudents);
-    inputResults(edges, numberOfStudents, &nonEmptyWorks);
+    inputResults(edges, numberOfStudents);
 
-    Graph* graph = createGraph(nonEmptyWorks, nonEmptyWorks, edges);
+    Graph* graph = createGraph(numberOfStudents, numberOfStudents, edges);
     printResults(graph);
 
     destroyGraph(graph);
