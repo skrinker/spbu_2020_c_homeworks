@@ -46,8 +46,20 @@ int getNumberFromString(char* string, int start, int end)
     int value = 0;
     for (int j = start; j <= end; ++j) {
         if (isdigit(string[j])) {
-            value += (string[j] - '0') * binaryPow(10, end - j);
+            value += (string[j] - '0') * binaryPow(end - j, 10);
         }
     }
     return value;
+}
+
+char* convertWordToLowerCase(char* word)
+{
+    for (int i = 0; i < strlen(word); i++) {
+        word[i] = tolower(word[i]);
+    }
+}
+
+bool isAlphabet(char symbol)
+{
+    return (symbol >= 'a' && symbol <= 'z') || (symbol >= 'A' && symbol <= 'Z');
 }

@@ -1,7 +1,6 @@
 
 cmake_minimum_required(VERSION 3.17)
 project(spbu_2020_c_homeworks C)
-
 set(CMAKE_C_STANDARD 11)
 
 set(libraries
@@ -15,7 +14,13 @@ add_library(list library/list/list.c)
 add_library(stack library/stack/stack.c)
 add_library(bst library/bst/bst.c)
 add_library(bstNode library/bst/bstNode.c)
+add_library(io library/IO/io.c)
+add_library(graph library/graph/graph.c)
 
+add_executable(task_7.2 homework_7/task_2.c)
+target_link_libraries(task_7.2 io graph libraries)
+add_executable(task_7.1 homework_7/task_1.c)
+target_link_libraries(task_7.1 graph)
 add_executable(task_5.1 homework_5/task_1.c)
 target_link_libraries(task_5.1 bst bstNode)
 add_executable(task_4.3 homework_4/task_3.c)
