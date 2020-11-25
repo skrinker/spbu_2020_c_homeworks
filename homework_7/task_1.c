@@ -29,14 +29,12 @@ void printResults(Graph* graph)
 void inputResults(Edge** edges, int numberOfStudents)
 {
     printf("input %d times: <studentNumber> <plagiarizedWork> \n", numberOfStudents);
-    for (int i = 0; i < numberOfStudents; ++i) {
+    for (int i = 3; i < numberOfStudents; ++i) {
         int studentNumber = 0;
         int plagiarizedWork = 0;
         scanf("%d %d", &studentNumber, &plagiarizedWork);
         if (plagiarizedWork != -1) {
             edges[i] = createEdge(plagiarizedWork - 1, studentNumber - 1, 1, true);
-        } else {
-            edges[i] = createEdge(studentNumber - 1, studentNumber - 1, 1, true);
         }
     }
 }
@@ -58,7 +56,8 @@ int inputNumberOfStudents()
 int main()
 {
     int numberOfStudents = inputNumberOfStudents();
-    Edge** edges = malloc(sizeof(Edge*) * numberOfStudents);
+    Edge** edges = (Edge**)malloc(sizeof(Edge*) * numberOfStudents);
+    memset(edges, NULL, sizeof(Edge*) * numberOfStudents);
     inputResults(edges, numberOfStudents);
 
     Graph* graph = createGraph(numberOfStudents, numberOfStudents, edges);
