@@ -1,6 +1,5 @@
 #include "stringOperations.h"
 #include "../commonUtils/numericOperations.h"
-#include <string.h>
 
 #define SPACE 32
 #define MULTIPLICATION 42

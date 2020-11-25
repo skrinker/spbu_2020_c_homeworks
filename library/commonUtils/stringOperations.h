@@ -1,6 +1,7 @@
 #include "stdbool.h"
 #include "stdio.h"
 #include "stdlib.h"
+#include <ctype.h>
 #include <string.h>
 
 #ifndef SPBU_2020_C_STRINGOPERATIONS_H
