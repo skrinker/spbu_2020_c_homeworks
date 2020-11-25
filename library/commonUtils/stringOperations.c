@@ -52,7 +52,7 @@ int getNumberFromString(char* string, int start, int end)
     return value;
 }
 
-char* convertWordToLowerCase(char* word)
+void convertWordToLowerCase(char* word)
 {
     for (int i = 0; i < strlen(word); i++) {
         word[i] = tolower(word[i]);

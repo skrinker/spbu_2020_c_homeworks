@@ -12,6 +12,6 @@ bool isCharNumber(char symbol);
 bool isAlphabet(char symbol);
 char* getString();
 int getNumberFromString(char* string, int start, int end);
-char* convertWordToLowerCase(char* word);
+void convertWordToLowerCase(char* word);
 
 #endif
