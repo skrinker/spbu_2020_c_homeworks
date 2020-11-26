@@ -19,8 +19,6 @@ add_library(graph library/graph/graph.c)
 
 add_executable(task_7.2 homework_7/task_2.c)
 target_link_libraries(task_7.2 io graph libraries list)
-add_executable(task_7.1 homework_7/task_1.c)
-target_link_libraries(task_7.1 graph)
 add_executable(task_5.1 homework_5/task_1.c)
 target_link_libraries(task_5.1 bst bstNode)
 add_executable(task_4.3 homework_4/task_3.c)
