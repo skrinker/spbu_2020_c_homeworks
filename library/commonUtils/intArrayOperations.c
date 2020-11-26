@@ -58,3 +58,12 @@ void mergeSort(int arr[], int l, int r)
         merge(arr, l, m, r);
     }
 }
+
+bool isContains(int* array, int value, int start, int end)
+{
+    for (int i = start; i < end + 1; ++i) {
+        if (array[i] == value)
+            return true;
+    }
+    return false;
+}

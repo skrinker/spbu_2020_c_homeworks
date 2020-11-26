@@ -15,6 +15,7 @@ bool isCycled(Graph* graph);
 int getCountVertex(Graph* graph);
 void destroyGraph(Graph* graph);
 int getNeighbour(Graph* graph, int vertex);
+int getWeight(Graph* graph, int start, int end);
 void printGraphMatrix(Graph* graph);
 void deleteEdge(Graph* graph, int start, int end, bool oriented);
 

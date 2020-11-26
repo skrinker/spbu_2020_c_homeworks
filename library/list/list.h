@@ -1,6 +1,6 @@
-#include "stdbool.h"
-#include "stdio.h"
-#include "stdlib.h"
+#include <stdbool.h>
+#include <stdio.h>
+#include <stdlib.h>
 
 #ifndef SPBU_2020_C_LIST_H
 #define SPBU_2020_C_LIST_H
@@ -16,10 +16,11 @@ ListElement* createListElement(int value);
 ListElement* createListElementWithNext(int value, ListElement* next);
 ListElement* tail(List* list);
 ListElement* head(List* list);
+void push(List* list, int value);
 bool insert(ListElement* element, int position, List* list);
 int locate(ListElement* element, List* list);
 int locateByValue(ListElement* element, List* list);
-ListElement* retrieve(int position, List* list);
+int retrieve(int position, List* list);
 bool deleteElement(int position, List* list);
 void printList(List* list);
 int getSize(List* list);

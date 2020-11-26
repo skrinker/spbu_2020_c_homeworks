@@ -18,29 +18,38 @@ struct Graph {
 
 void printGraphMatrix(Graph* graph)
 {
+    printf("\n");
     for (int i = 0; i < graph->countVertex; ++i) {
         for (int j = 0; j < graph->countVertex; ++j) {
-            printf("%d ", graph->matrix[i][j]);
+            printf("%d   ", graph->matrix[i][j]);
         }
         printf("\n");
     }
 }
 
+int getWeight(Graph* graph, int start, int end)
+{
+    return graph->matrix[start][end];
+}
+
 int getNeighbour(Graph* graph, int vertex)
 {
-    int minimum = 0;
+    int minimum = -1;
+    int minimumIndex = -1;
     for (int i = 0; i < graph->countVertex; ++i) {
         if (graph->matrix[vertex][i] != 0) {
             minimum = graph->matrix[vertex][i];
+            minimumIndex = i;
             break;
         }
     }
     for (int i = 0; i < graph->countVertex; ++i) {
         if (graph->matrix[vertex][i] < minimum && graph->matrix[vertex][i] != 0) {
             minimum = graph->matrix[vertex][i];
+            minimumIndex = i;
         }
     }
-    return minimum;
+    return minimumIndex;
 }
 
 void deleteEdge(Graph* graph, int start, int end, bool oriented)
