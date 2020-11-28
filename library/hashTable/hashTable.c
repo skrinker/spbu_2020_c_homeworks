@@ -158,22 +158,22 @@ bool addValue(HashTable* table, char* key, int value, int numberOfProbes)
 
 void deleteHashElement(HashElement* element)
 {
-    if (element != NULL) {
+    if (element->key != NULL) {
         free(element->key);
-        free(element);
     }
+    free(element);
 }
 
 bool removeValue(HashTable* table, char* key)
 {
-    if (table->elementCount == 0)
+    if (table == NULL || table->elementCount == 0)
         return false;
     int currentNumberOfProbes = 1;
     int hash = getHash(key, table->polynomFactor, table->bucketCount);
     int startIndex = getCurrentIndex(hash, currentNumberOfProbes, table->bucketCount);
     int currentIndex = startIndex;
     printf("%d", table->types[currentIndex]);
-    while (table->types[currentIndex] != empty) {
+    while (table->types[currentIndex] == used) {
         if (strcmp(key, table->hashTable[currentIndex]->key) == 0) {
             table->types[currentIndex] = deleted;
             deleteHashElement(table->hashTable[currentIndex]);
@@ -255,8 +255,10 @@ void printMaximumNumberOfRepeats(HashTable* table, int number)
             }
             counted[maximumIndex] = true;
         }
-        printf("%s: %d \n", table->hashTable[maximumIndex]->key,
-            table->hashTable[maximumIndex]->value);
+        if (table->types[maximumIndex] == used) {
+            printf("%s: %d \n", table->hashTable[maximumIndex]->key,
+                table->hashTable[maximumIndex]->value);
+        }
     }
     free(counted);
 }

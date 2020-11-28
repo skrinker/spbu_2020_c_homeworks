@@ -18,11 +18,10 @@ char* readWordFromFile(FILE* inputFile)
             capacity *= 2;
             word = (char*)realloc(word, capacity * sizeof(char));
         }
+        for (int i = length; i < capacity; ++i) {
+            word[i] = '0';
+        }
         symbol = fgetc(inputFile);
-    }
-    if (length >= capacity) {
-        capacity *= 2;
-        word = (char*)realloc(word, capacity * sizeof(char));
     }
     word[length] = '\0';
     return word;
