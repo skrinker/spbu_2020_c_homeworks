@@ -28,11 +28,11 @@ int main()
         printf("Cannot open file.\n");
         return 0;
     }
-    
+
     char* word = NULL;
     HashTable* table = createHashTable(2, getHash, getCurrentIndex);
     word = readWordFromFile((FILE*)inputFile);
-    
+
     while (word) {
         convertWordToLowerCase(word);
         if (word[0] != '\0')
