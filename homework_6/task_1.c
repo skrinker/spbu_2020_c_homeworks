@@ -23,17 +23,16 @@ int getCurrentIndex(int hash, int currentNumberOfProbes, int module)
 
 int main()
 {
-    HashTable* table = createHashTable(2, getHash, getCurrentIndex);
-
     FILE* inputFile = fopen("./homework_6/test.txt", "re");
-    char* word = NULL;
-
     if (inputFile == NULL) {
         printf("Cannot open file.\n");
         return 0;
     }
-
+    
+    char* word = NULL;
+    HashTable* table = createHashTable(2, getHash, getCurrentIndex);
     word = readWordFromFile((FILE*)inputFile);
+    
     while (word) {
         convertWordToLowerCase(word);
         if (word[0] != '\0')
