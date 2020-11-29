@@ -1,6 +1,5 @@
 #include "stringOperations.h"
 #include "../commonUtils/numericOperations.h"
-#include <string.h>
 
 #define SPACE 32
 #define MULTIPLICATION 42
@@ -50,4 +49,16 @@ int getNumberFromString(char* string, int start, int end)
         }
     }
     return value;
+}
+
+void convertWordToLowerCase(char* word)
+{
+    for (int i = 0; i < strlen(word); i++) {
+        word[i] = tolower(word[i]);
+    }
+}
+
+bool isAlphabet(char symbol)
+{
+    return (symbol >= 'a' && symbol <= 'z') || (symbol >= 'A' && symbol <= 'Z');
 }
