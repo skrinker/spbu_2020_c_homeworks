@@ -1,7 +1,6 @@
 
 cmake_minimum_required(VERSION 3.17)
 project(spbu_2020_c_homeworks C)
-
 set(CMAKE_C_STANDARD 11)
 
 set(libraries
@@ -18,9 +17,14 @@ add_library(bstNode library/bst/bstNode.c)
 add_library(graph library/graph/graph.c)
 add_library(avl library/avl/avl.c)
 add_library(avlNode library/avl/avlNode.c)
+add_library(hashTable library/hashTable/hashTable.c)
+add_library(io library/IO/io.c)
 
 add_executable(task_7.1 homework_7/task_1.c)
 target_link_libraries(task_7.1 graph)
+
+add_executable(task_6.1 homework_6/task_1.c)
+target_link_libraries(task_6.1 hashTable io libraries)
 add_executable(task_5.2 homework_5/task_2.c)
 target_link_libraries(task_5.2 avl avlNode libraries)
 add_executable(task_5.1 homework_5/task_1.c)
