@@ -3,7 +3,30 @@
 #include "../library/list/list.h"
 #include <stdio.h>
 
-const int INT_MAX = 2147483647;
+void getRoadsFromFile(FILE* inputFile, Edge** edges, int numberOfRoads)
+{
+    for (int k = 0; k < numberOfRoads; ++k) {
+        int i = 0;
+        int j = 0;
+        int length = 0;
+
+        i = readNumberFromFile((FILE*)inputFile);
+        j = readNumberFromFile((FILE*)inputFile);
+        length = readNumberFromFile((FILE*)inputFile);
+
+        edges[k] = createEdge(i - 1, j - 1, length, false);
+    }
+}
+
+void getCapitalsFromFile(FILE* inputFile, List** agglomerations, int numberOfCapitals, bool* used)
+{
+    for (int i = 0; i < numberOfCapitals; ++i) {
+        int numberOfCapital = 0;
+        numberOfCapital = readNumberFromFile((FILE*)inputFile);
+        push(agglomerations[i], numberOfCapital - 1);
+        used[numberOfCapital - 1] = true;
+    }
+}
 
 void printResults(List* agglomeration, int numberOfCapitals)
 {
@@ -24,9 +47,18 @@ void destroyEdgesArray(Edge** edges, int size)
     free(edges);
 }
 
+void printAgglomerationsInformation(List** agglomerations, int numberOfCapitals)
+{
+    for (int i = 0; i < numberOfCapitals; ++i) {
+        printf("agglomeration: %d, ", i + 1);
+        printResults(agglomerations[i], numberOfCapitals);
+        deleteList(agglomerations[i]);
+    }
+}
+
 bool addCityToAgglomeration(List* agglomeration, Graph* graph, bool* used)
 {
-    int minimumLength = INT_MAX;
+    int minimumLength = -1;
     int currentLength = 0;
     int addedCity = -1;
     int currentCity = 0;
@@ -37,7 +69,7 @@ bool addCityToAgglomeration(List* agglomeration, Graph* graph, bool* used)
         if (addedCity == -1 || used[addedCity])
             continue;
         currentLength = getWeight(graph, currentCity, addedCity);
-        if (currentLength < minimumLength)
+        if (currentLength < minimumLength || minimumLength == -1)
             minimumLength = currentLength;
     }
 
@@ -51,7 +83,18 @@ bool addCityToAgglomeration(List* agglomeration, Graph* graph, bool* used)
         used[addedCity] = true;
     }
 
-    return (minimumLength == INT_MAX) ? false : true;
+    return (minimumLength == -1) ? false : true;
+}
+
+void addCitiesToAgglomerations(int usedCities, int numberOfCapitals, int numberOfCities, List** agglomerations, bool* used, Graph* graph)
+{
+    while (usedCities < numberOfCities) {
+        for (int i = 0; i < numberOfCapitals; ++i) {
+            if (addCityToAgglomeration(agglomerations[i], graph, used)) {
+                ++usedCities;
+            }
+        }
+    }
 }
 
 int main()
@@ -69,18 +112,7 @@ int main()
     numberOfRoads = readNumberFromFile((FILE*)inputFile);
 
     Edge** edges = malloc(sizeof(Edge*) * numberOfRoads);
-
-    for (int k = 0; k < numberOfRoads; ++k) {
-        int i = 0;
-        int j = 0;
-        int length = 0;
-
-        i = readNumberFromFile((FILE*)inputFile);
-        j = readNumberFromFile((FILE*)inputFile);
-        length = readNumberFromFile((FILE*)inputFile);
-
-        edges[k] = createEdge(i - 1, j - 1, length, false);
-    }
+    getRoadsFromFile(inputFile, edges, numberOfRoads);
 
     Graph* graph = createGraph(numberOfRoads, numberOfCities, edges);
 
@@ -95,28 +127,13 @@ int main()
     bool* used = (bool*)malloc(sizeof(bool) * numberOfCities);
     memset(used, false, sizeof(bool) * numberOfCities);
 
-    for (int i = 0; i < numberOfCapitals; ++i) {
-        int numberOfCapital = 0;
-        numberOfCapital = readNumberFromFile((FILE*)inputFile);
-        push(agglomerations[i], numberOfCapital - 1);
-        used[numberOfCapital - 1] = true;
-    }
+    getCapitalsFromFile(inputFile, agglomerations, numberOfCapitals, used);
 
     int usedCities = numberOfCapitals;
 
-    while (usedCities < numberOfCities) {
-        for (int i = 0; i < numberOfCapitals; ++i) {
-            if (addCityToAgglomeration(agglomerations[i], graph, used)) {
-                ++usedCities;
-            }
-        }
-    }
+    addCitiesToAgglomerations(usedCities, numberOfCapitals, numberOfCities, agglomerations, used, graph);
 
-    for (int i = 0; i < numberOfCapitals; ++i) {
-        printf("agglomeration: %d, ", i + 1);
-        printResults(agglomerations[i], numberOfCapitals);
-        deleteList(agglomerations[i]);
-    }
+    printAgglomerationsInformation(agglomerations, numberOfCapitals);
 
     free(agglomerations);
     free(used);
