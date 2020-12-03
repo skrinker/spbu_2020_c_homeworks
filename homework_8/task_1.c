@@ -6,12 +6,12 @@
 
 const char SWAP_SYMBOL = 'd';
 
-void deleteStates(DFAState** dfaStates, int stateCount)
+void deleteStates(DFAState** states, int stateCount)
 {
     for (int i = 0; i < stateCount; ++i) {
-        destroyDFAState(dfaStates[i]);
+        destroyDFAState(states[i]);
     }
-    free(dfaStates);
+    free(states);
 }
 
 DFAState** createTransitionsAndStates()
