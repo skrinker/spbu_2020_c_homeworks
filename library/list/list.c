@@ -39,6 +39,17 @@ ListElement* createListElementWithNext(int value, ListElement* next)
     return listElement;
 }
 
+void push(List* list, int value)
+{
+    if (isEmpty(list)) {
+        list->head = createListElement(value);
+    } else {
+        ListElement* tailElement = tail(list);
+        tailElement->next = createListElement(value);
+    }
+    list->size++;
+}
+
 ListElement* head(List* list)
 {
     return list->head;
@@ -89,11 +100,11 @@ void printList(List* list)
         return;
     }
     ListElement* current = list->head;
-    for (int i = 0; i < getSize(list) - 1; i++) {
-        printf("%d -> ", getValue(current));
+    for (int i = 0; i < getSize(list); i++) {
+        printf("%d ", getValue(current));
         current = getNext(current);
     }
-    printf("%d \n", getValue(current));
+    printf("\n");
 }
 
 int locate(ListElement* element, List* list)
@@ -122,14 +133,14 @@ int locateByValue(ListElement* element, List* list)
     return -1;
 }
 
-ListElement* retrieve(int position, List* list)
+int retrieve(int position, List* list)
 {
     if (position < getSize(list) && position >= 0) {
         ListElement* current = list->head;
         for (int i = 0; i < position; i++) {
             current = getNext(current);
         }
-        return current;
+        return current->value;
     }
     return NULL;
 }

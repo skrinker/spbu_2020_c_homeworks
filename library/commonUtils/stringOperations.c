@@ -45,7 +45,7 @@ int getNumberFromString(char* string, int start, int end)
     int value = 0;
     for (int j = start; j <= end; ++j) {
         if (isdigit(string[j])) {
-            value += (string[j] - '0') * binaryPow(10, end - j);
+            value += (string[j] - '0') * binaryPow(end - j, 10);
         }
     }
     return value;
