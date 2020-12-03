@@ -19,10 +19,13 @@ add_library(avl library/avl/avl.c)
 add_library(avlNode library/avl/avlNode.c)
 add_library(hashTable library/hashTable/hashTable.c)
 add_library(io library/IO/io.c)
+add_library(doubleLinkedList library/doubleLinkedList/list.c)
+
+add_executable(test_1.1.1 test_1/task_1.c)
+target_link_libraries(test_1.1.1 doubleLinkedList)
 
 add_executable(task_7.1 homework_7/task_1.c)
 target_link_libraries(task_7.1 graph)
-
 add_executable(task_6.1 homework_6/task_1.c)
 target_link_libraries(task_6.1 hashTable io libraries)
 add_executable(task_5.2 homework_5/task_2.c)
