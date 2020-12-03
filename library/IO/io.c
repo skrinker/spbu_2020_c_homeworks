@@ -21,6 +21,9 @@ char* readWordFromFile(FILE* inputFile)
                 word[i] = '0';
             }
         }
+        for (int i = length; i < capacity; ++i) {
+            word[i] = '0';
+        }
         symbol = fgetc(inputFile);
     }
     word[length] = '\0';
