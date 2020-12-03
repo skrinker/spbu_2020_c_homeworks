@@ -64,6 +64,8 @@ void changeAllDigitsToSymbol(char* inputString, char symbol)
 int main()
 {
     char* inputString = NULL;
+
+    printf("Input string: \n");
     inputString = getString();
 
     changeAllDigitsToSymbol(inputString, SWAP_SYMBOL);
