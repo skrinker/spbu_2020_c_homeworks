@@ -1,16 +1,17 @@
-#ifndef SPBU_2020_C_DFA_H
-#define SPBU_2020_C_DFA_H
+#ifndef __DFA_H__
+#define __DFA_H__
 
 #include "stdbool.h"
 
 typedef struct DFAState DFAState;
 typedef struct DFA DFA;
 
-DFA* createDFA(DFAState** states, int statesCount);
-DFAState* createDFAState(bool isFinal);
+DFA* createDFA(DFAState* initialState);
+DFAState* createDFAState(int id, bool isFinal);
 void addTransition(DFAState* firstState, char value, DFAState* secondState);
-bool isCorrect(char* string, DFA* dfa);
-void destroyDFAState(DFAState* dfaState);
+bool isStringCorrect(char* string, DFA* dfa);
+void printDFATransitions(DFA* dfa);
 void destroyDFA(DFA* dfa);
+void destroyDFAState(DFAState* state);
 
 #endif

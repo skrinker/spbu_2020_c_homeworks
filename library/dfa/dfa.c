@@ -32,7 +32,7 @@ Transition* createTransition(char symbol, DFAState* transitionState)
 
 DFA* createDFA(DFAState* initialState)
 {
-    DFA* dfa = (DFA*)malloc(sizeof(DFA*));
+    DFA* dfa = (DFA*)malloc(sizeof(DFA));
     dfa->initialState = initialState;
     dfa->failState = createDFAState(-1, false);
 
@@ -67,7 +67,7 @@ void addTransition(DFAState* firstState, char value, DFAState* secondState)
     firstState->transitionsSize++;
 }
 
-bool isCorrect(char* string, DFA* dfa)
+bool isStringCorrect(char* string, DFA* dfa)
 {
     DFAState* currentDfaState = dfa->initialState;
     for (int i = 0; i < strlen(string); ++i) {
@@ -99,4 +99,19 @@ void printDFATransitions(DFA* dfa)
 {
     bool* used = (bool*)malloc(sizeof(bool));
     DFAState* initialState = dfa->initialState;
+}
+
+void destroyDFA(DFA* dfa)
+{
+    destroyDFAState(dfa->failState);
+    free(dfa);
+}
+
+void destroyDFAState(DFAState* state)
+{
+    for (int i = 0; i < state->transitionAllocationSize; ++i) {
+        free(state->transitions[i]);
+    }
+    free(state->transitions);
+    free(state);
 }
