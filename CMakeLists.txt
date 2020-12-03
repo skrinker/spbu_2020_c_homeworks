@@ -18,7 +18,7 @@ add_library(bstNode library/bst/bstNode.c)
 add_library(dfs library/dfa/dfa.c)
 
 add_executable(task_8.1 homework_8/task_1.c)
-target_link_libraries(task_8.1 dfs)
+target_link_libraries(task_8.1 dfs libraries)
 add_executable(task_5.1 homework_5/task_1.c)
 target_link_libraries(task_5.1 bst bstNode)
 add_executable(task_4.3 homework_4/task_3.c)
