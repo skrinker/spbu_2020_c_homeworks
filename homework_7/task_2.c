@@ -83,7 +83,7 @@ bool addCityToAgglomeration(List* agglomeration, Graph* graph, bool* used)
         used[addedCity] = true;
     }
 
-    return (minimumLength == -1) ? false : true;
+    return (minimumLength != -1);
 }
 
 void addCitiesToAgglomerations(int usedCities, int numberOfCapitals, int numberOfCities, List** agglomerations, bool* used, Graph* graph)
