@@ -19,7 +19,6 @@ add_library(graph library/graph/graph.c)
 add_library(avl library/avl/avl.c)
 add_library(avlNode library/avl/avlNode.c)
 add_library(hashTable library/hashTable/hashTable.c)
-add_library(io library/IO/io.c)
 add_library(doubleLinkedList library/doubleLinkedList/list.c)
 
 add_executable(test_2.2.1 test_2/task_2.c)

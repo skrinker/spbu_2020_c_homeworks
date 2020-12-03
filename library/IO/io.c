@@ -17,18 +17,44 @@ char* readWordFromFile(FILE* inputFile)
         if (length >= capacity) {
             capacity *= 2;
             word = (char*)realloc(word, capacity * sizeof(char));
-        }
-        symbol = fgetc(inputFile);
-    }
-    if (length >= capacity) {
-        capacity *= 2;
-        word = (char*)realloc(word, capacity * sizeof(char));
-    }
-        for (int i = length; i < capacity; ++i) {
-            word[i] = '0';
+            for (int i = length; i < capacity; ++i) {
+                word[i] = '0';
+            }
         }
         symbol = fgetc(inputFile);
     }
     word[length] = '\0';
     return word;
+}
+
+int readNumberFromFile(FILE* inputFile)
+{
+    int result = -1;
+    int length = 0;
+    int capacity = 1;
+    char* number = (char*)malloc(sizeof(char) * capacity);
+    number[0] = '0';
+    char symbol = fgetc(inputFile);
+    if (symbol == EOF) {
+        free(number);
+        return number;
+    }
+    while (isCharNumber(symbol)) {
+        number[length] = symbol;
+        ++length;
+        if (length >= capacity) {
+            capacity *= 2;
+            number = (char*)realloc(number, capacity * sizeof(char));
+            for (int i = length; i < capacity; ++i) {
+                number[i] = '0';
+            }
+        }
+        symbol = fgetc(inputFile);
+    }
+    number[length] = '\0';
+    if (number[0] != '\0') {
+        result = getNumberFromString(number, 0, strlen(number) - 1);
+    }
+    free(number);
+    return result;
 }
