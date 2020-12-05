@@ -70,8 +70,6 @@ int main()
 
     changeAllDigitsToSymbol(inputString, SWAP_SYMBOL);
 
-    int statesCount = 8;
-
     DFAState** states = createTransitionsAndStates();
     DFA* dfa = createDFA(states[0]);
 

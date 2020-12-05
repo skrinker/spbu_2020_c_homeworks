@@ -1,5 +1,6 @@
 #include "dfa.h"
 #include <stdbool.h>
+#include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
 
@@ -93,12 +94,6 @@ void printDFAStateTransitions(DFAState* dfaState, bool* used)
         printf("(%d %c) -> %d", dfaState->id, transition->symbol, transition->transitionState->id);
     }
     used[dfaState->id] = true;
-}
-
-void printDFATransitions(DFA* dfa)
-{
-    bool* used = (bool*)malloc(sizeof(bool));
-    DFAState* initialState = dfa->initialState;
 }
 
 void destroyDFA(DFA* dfa)

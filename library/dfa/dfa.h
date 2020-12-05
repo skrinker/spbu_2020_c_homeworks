@@ -10,7 +10,7 @@ DFA* createDFA(DFAState* initialState);
 DFAState* createDFAState(int id, bool isFinal);
 void addTransition(DFAState* firstState, char value, DFAState* secondState);
 bool isStringCorrect(char* string, DFA* dfa);
-void printDFATransitions(DFA* dfa);
+void printDFAStateTransitions(DFAState* dfaState, bool* used);
 void destroyDFA(DFA* dfa);
 void destroyDFAState(DFAState* state);
 
