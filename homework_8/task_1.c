@@ -14,9 +14,8 @@ void deleteStates(DFAState** states, int stateCount)
     free(states);
 }
 
-DFAState** createTransitionsAndStates()
+DFAState** createTransitionsAndStates(statesCount)
 {
-    int statesCount = 8;
     DFAState** states = (DFAState**)malloc(sizeof(DFAState*) * statesCount);
     DFAState* initialState = createDFAState(0, false);
     states[0] = initialState;
@@ -70,14 +69,16 @@ int main()
 
     changeAllDigitsToSymbol(inputString, SWAP_SYMBOL);
 
-    DFAState** states = createTransitionsAndStates();
+    int statesCount = 8;
+
+    DFAState** states = createTransitionsAndStates(statesCount);
     DFA* dfa = createDFA(states[0]);
 
     printf("Input string %scorrect. \n", isStringCorrect(inputString, dfa) ? "" : "in");
 
     destroyDFA(dfa);
     free(inputString);
-    deleteStates(states, 8);
+    deleteStates(states, statesCount);
 
     return 0;
 }
