@@ -22,6 +22,8 @@ add_library(avlNode library/avl/avlNode.c)
 add_library(hashTable library/hashTable/hashTable.c)
 add_library(doubleLinkedList library/doubleLinkedList/list.c)
 
+add_executable(test_3.2 test_3/task_2.c)
+target_link_libraries(test_3.2 graph)
 add_executable(task_8.1 homework_8/task_1.c)
 target_link_libraries(task_8.1 dfs libraries)
 add_executable(test_2.2.1 test_2/task_2.c)

@@ -118,6 +118,26 @@ bool depthFirstSearch(Graph* graph, int currentVertex, int* vertexState)
     return false;
 }
 
+bool depthFirstSearchWithHistory(Graph* graph, int currentVertex, int* vertexState)
+{
+    vertexState[currentVertex] = 1;
+    for (int i = 0; i < graph->countVertex; i++) {
+        if (graph->matrix[currentVertex][i] != 0 && i != currentVertex) {
+            if (vertexState[i] == 1) {
+                return true;
+            }
+            if (vertexState[i] == 0) {
+                printf("%d", i);
+                if (depthFirstSearchWithHistory(graph, i, vertexState)) {
+                    return true;
+                }
+            }
+        }
+    }
+    vertexState[currentVertex] = 2;
+    return false;
+}
+
 bool isCycled(Graph* graph)
 {
     int* vertexState = (int*)malloc(graph->countVertex * sizeof(int));
