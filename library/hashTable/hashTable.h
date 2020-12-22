@@ -12,5 +12,7 @@ bool removeValue(HashTable* table, char* key);
 void printInfo(HashTable* table, int number);
 HashTable* createHashTable(int polynomFactor, HashFunction getHash, GetIndexFunction getCurrentIndex);
 void destroyHashTable(HashTable* table);
+int getElementCount(HashTable* table);
+void printKeysWithValuesByIncreasing(HashTable* table);
 
 #endif

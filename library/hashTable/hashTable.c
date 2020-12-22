@@ -1,4 +1,5 @@
 #include "hashTable.h"
+#include "../commonUtils/stringOperations.h"
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
@@ -172,7 +173,6 @@ bool removeValue(HashTable* table, char* key)
     int hash = getHash(key, table->polynomFactor, table->bucketCount);
     int startIndex = getCurrentIndex(hash, currentNumberOfProbes, table->bucketCount);
     int currentIndex = startIndex;
-    printf("%d", table->types[currentIndex]);
     while (table->types[currentIndex] == used) {
         if (strcmp(key, table->hashTable[currentIndex]->key) == 0) {
             table->types[currentIndex] = deleted;
@@ -261,6 +261,38 @@ void printMaximumNumberOfRepeats(HashTable* table, int number)
         }
     }
     free(counted);
+}
+
+void printKeysWithValuesByIncreasing(HashTable* table)
+{
+    if (table->elementCount == 0) {
+        printf("Table is empty \n");
+        return;
+    }
+    int minimumValue = 0;
+    int minimumIndex = 0;
+    for (int j = 0; j < table->bucketCount; ++j) {
+        if (table->elementCount == 0)
+            break;
+        for (int i = 0; i < table->bucketCount; ++i) {
+            if (table->types[i] == used) {
+                minimumValue = atoi(table->hashTable[i]->key);
+                minimumIndex = i;
+                break;
+            }
+        }
+        for (int i = 0; i < table->bucketCount; ++i) {
+            if (table->types[i] == used) {
+                int currentKey = atoi(table->hashTable[i]->key);
+                if (currentKey < minimumValue) {
+                    minimumValue = currentKey;
+                    minimumIndex = i;
+                }
+            }
+        }
+        printf("%s : %d \n", table->hashTable[minimumIndex]->key, table->hashTable[minimumIndex]->value);
+        removeValue(table, table->hashTable[minimumIndex]->key);
+    }
 }
 
 void printInfo(HashTable* table, int number)

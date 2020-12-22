@@ -48,7 +48,7 @@ int getNumberFromString(char* string, int start, int end)
             value += (string[j] - '0') * binaryPow(end - j, 10);
         }
     }
-    return value;
+    return (string[start] == '-') ? value * (-1) : value;
 }
 
 void convertWordToLowerCase(char* word)
