@@ -21,14 +21,14 @@ add_library(avl library/avl/avl.c)
 add_library(avlNode library/avl/avlNode.c)
 add_library(hashTable library/hashTable/hashTable.c)
 add_library(doubleLinkedList library/doubleLinkedList/list.c)
+add_library(priorityQueue library/priorityQueue/queue.c)
 
-
+add_executable(test_3.2.1 test_3/task_2.c)
+target_link_libraries(test_3.2.1 priorityQueue)
 add_executable(test_3.1 test_3/task_1.c)
 target_link_libraries(test_3.1 hashTable libraries)
-
 add_executable(test_2.3.1 test_2/task_3.c)
 target_link_libraries(test_2.3.1 graph)
-
 add_executable(task_8.1 homework_8/task_1.c)
 target_link_libraries(task_8.1 dfs libraries)
 add_executable(test_2.2.1 test_2/task_2.c)
